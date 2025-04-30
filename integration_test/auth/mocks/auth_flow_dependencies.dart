@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:front_scaffold_flutter_v2/domain/usecases/usecases.dart';
-import 'package:front_scaffold_flutter_v2/ui/blocs/blocs.dart';
-import 'package:front_scaffold_flutter_v2/ui/cubits/cubits.dart';
-import 'package:front_scaffold_flutter_v2/ui/shared/service/service.dart';
+import 'package:todo_app/domain/usecases/usecases.dart';
+import 'package:todo_app/ui/blocs/blocs.dart';
+import 'package:todo_app/ui/cubits/cubits.dart';
+import 'package:todo_app/ui/shared/service/service.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 

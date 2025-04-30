@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:front_scaffold_flutter_v2/config/config.dart';
-import 'package:front_scaffold_flutter_v2/ui/blocs/blocs.dart';
-import 'package:front_scaffold_flutter_v2/ui/shared/shared.dart';
+import 'package:todo_app/config/config.dart';
+import 'package:todo_app/ui/blocs/blocs.dart';
+import 'package:todo_app/ui/shared/shared.dart';
 import 'package:go_router/go_router.dart';
 
 class DrawerHome extends StatelessWidget {

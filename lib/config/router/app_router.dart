@@ -1,7 +1,5 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:front_scaffold_flutter_v2/ui/cubits/introduction_cubit/introduction_cubit.dart';
 import 'package:go_router/go_router.dart';
-import 'package:front_scaffold_flutter_v2/ui/blocs/blocs.dart';
+import 'package:todo_app/ui/blocs/blocs.dart';
 import 'go_router_notifier.dart';
 import 'redirect_handler.dart';
 import 'routes_constants.dart';
@@ -21,13 +19,13 @@ import 'routes_generator.dart';
 /// Returns:
 ///   - A configured [GoRouter] instance ready to be used in the application.
 GoRouter createAppRouter(AuthBloc authBloc) {
-  final goRouterNotifier = GoRouterNotifier(authBloc);
+  /* final goRouterNotifier = GoRouterNotifier(authBloc); */
 
   return GoRouter(
-    initialLocation: RouteConstants.onboardingScreen,
-    refreshListenable: goRouterNotifier,
+    initialLocation: RouteConstants.home,
     routes: AppRoutes.getAppRoutes(),
-    redirect: (context, state) {
+    /* refreshListenable: goRouterNotifier, */
+    /* redirect: (context, state) {
       final introductionCubit = BlocProvider.of<IntroductionCubit>(
         context,
         listen: false,
@@ -46,6 +44,6 @@ GoRouter createAppRouter(AuthBloc authBloc) {
       }
 
       return appRedirect(goRouterNotifier, state, isOnboardingCompleted);
-    },
+    }, */
   );
 }

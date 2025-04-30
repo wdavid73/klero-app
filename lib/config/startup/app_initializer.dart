@@ -1,4 +1,4 @@
-import 'package:front_scaffold_flutter_v2/config/config.dart';
+import 'package:todo_app/config/config.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 

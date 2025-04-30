@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:front_scaffold_flutter_v2/api/api.dart';
+import 'package:todo_app/api/api.dart';
 
 /// Interceptor for handling API errors.
 ///

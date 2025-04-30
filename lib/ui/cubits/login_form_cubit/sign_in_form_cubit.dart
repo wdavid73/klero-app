@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-import 'package:front_scaffold_flutter_v2/ui/blocs/blocs.dart';
-import 'package:front_scaffold_flutter_v2/ui/shared/inputs/inputs.dart';
-import 'package:front_scaffold_flutter_v2/utils/utils.dart';
+import 'package:todo_app/ui/blocs/blocs.dart';
+import 'package:todo_app/ui/shared/inputs/inputs.dart';
+import 'package:todo_app/utils/utils.dart';
 
 part 'sign_in_form_state.dart';
 

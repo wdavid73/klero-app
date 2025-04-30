@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:front_scaffold_flutter_v2/api/api.dart';
-import 'package:front_scaffold_flutter_v2/data/data.dart';
-import 'package:front_scaffold_flutter_v2/domain/datasources/auth_datasource.dart';
+import 'package:todo_app/api/api.dart';
+import 'package:todo_app/data/data.dart';
+import 'package:todo_app/domain/datasources/auth_datasource.dart';
 
 /// Example JSON response for login and checkAuthStatus:
 ///

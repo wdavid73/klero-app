@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_scaffold_flutter_v2/config/theme/responsive.dart';
+import 'package:todo_app/config/theme/responsive.dart';
 
 enum DeviceType { phone, tablet, other }
 

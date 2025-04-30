@@ -1,4 +1,4 @@
-package com.example.front_scaffold_flutter_v2
+package com.guichodevs.to_do_app
 
 import io.flutter.embedding.android.FlutterActivity
 

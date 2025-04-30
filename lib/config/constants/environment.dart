@@ -6,5 +6,5 @@ class Environment {
   }
 
   static String apiUrl = dotenv.env['API_URL'] ?? '';
-  static String appName = "My App";
+  static String appName = "ToDo App";
 }

@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:front_scaffold_flutter_v2/ui/shared/service/service.dart';
+import 'package:todo_app/ui/shared/service/service.dart';
 
 part 'introduction_state.dart';
 

@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:front_scaffold_flutter_v2/api/api.dart';
-import 'package:front_scaffold_flutter_v2/data/data.dart';
-import 'package:front_scaffold_flutter_v2/domain/repositories/repositories.dart';
-import 'package:front_scaffold_flutter_v2/domain/usecases/usecases.dart';
-import 'package:front_scaffold_flutter_v2/ui/blocs/blocs.dart';
-import 'package:front_scaffold_flutter_v2/ui/cubits/cubits.dart';
-import 'package:front_scaffold_flutter_v2/ui/shared/service/service.dart';
+import 'package:todo_app/api/api.dart';
+import 'package:todo_app/data/data.dart';
+import 'package:todo_app/domain/repositories/repositories.dart';
+import 'package:todo_app/domain/usecases/usecases.dart';
+import 'package:todo_app/ui/blocs/blocs.dart';
+import 'package:todo_app/ui/cubits/cubits.dart';
+import 'package:todo_app/ui/shared/service/service.dart';
 
 class AppInjection {
   /// Builds and provides a list of `RepositoryProvider` instances.

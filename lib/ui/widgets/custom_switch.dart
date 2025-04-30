@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:front_scaffold_flutter_v2/config/config.dart';
-import 'package:front_scaffold_flutter_v2/ui/shared/shared.dart';
+import 'package:todo_app/config/config.dart';
+import 'package:todo_app/ui/shared/shared.dart';
 
 class CustomSwitch extends StatelessWidget {
   final String title;

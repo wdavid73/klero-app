@@ -1,4 +1,4 @@
-import 'package:front_scaffold_flutter_v2/domain/entities/product.dart';
+import 'package:todo_app/domain/entities/product.dart';
 
 /// A concrete implementation of the [Product] entity.
 ///

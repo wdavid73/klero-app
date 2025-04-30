@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:front_scaffold_flutter_v2/app/app.dart';
-import 'package:front_scaffold_flutter_v2/config/config.dart';
+import 'package:todo_app/app/app.dart';
+import 'package:todo_app/config/config.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

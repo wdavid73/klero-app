@@ -1,8 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:front_scaffold_flutter_v2/ui/blocs/auth/auth_bloc.dart';
-import 'package:front_scaffold_flutter_v2/ui/cubits/cubits.dart';
-import 'package:front_scaffold_flutter_v2/ui/shared/inputs/inputs.dart';
+import 'package:todo_app/ui/blocs/auth/auth_bloc.dart';
+import 'package:todo_app/ui/cubits/cubits.dart';
+import 'package:todo_app/ui/shared/inputs/inputs.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'mocks/mock_sign_in_dependencies.dart';

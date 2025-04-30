@@ -1,7 +1,5 @@
-name: front_scaffold_flutter_v2
-description: "This is a base project in Flutter designed as a template for
-  future developments. It contains essential configurations and packages to
-  quickly start new projects."
+name: todo_app
+description: "Todo app"
 publish_to: "none"
 version: 0.0.1
 
@@ -54,7 +52,7 @@ flutter:
     - assets/icon/
     - assets/fonts/
     - assets/images/
-    - assets/images/introduction/
+    - assets/app-icon/
 
   fonts:
     - family: MontserratAlternates
@@ -64,3 +62,10 @@ flutter:
         - asset: assets/fonts/montserrat_alternates/MontserratAlternates-Medium.ttf
         - asset: assets/fonts/montserrat_alternates/MontserratAlternates-SemiBold.ttf
         - asset: assets/fonts/montserrat_alternates/MontserratAlternates-Bold.ttf
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/app-icon/icon.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "#D1C4E9"

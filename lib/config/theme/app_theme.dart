@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:front_scaffold_flutter_v2/config/config.dart';
-import 'package:front_scaffold_flutter_v2/config/theme/widget_themes/date_picker_theme.dart';
+import 'package:todo_app/config/config.dart';
+import 'package:todo_app/config/theme/widget_themes/date_picker_theme.dart';
 import './widget_themes/widget_themes.dart';
 
 class AppTheme {

@@ -1,6 +1,6 @@
-import 'package:front_scaffold_flutter_v2/api/api.dart';
-import 'package:front_scaffold_flutter_v2/domain/datasources/products_datasource.dart';
-import 'package:front_scaffold_flutter_v2/domain/repositories/products_repository.dart';
+import 'package:todo_app/api/api.dart';
+import 'package:todo_app/domain/datasources/products_datasource.dart';
+import 'package:todo_app/domain/repositories/products_repository.dart';
 
 /// Concrete implementation of [ProductsRepository].
 ///

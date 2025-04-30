@@ -1,5 +1,5 @@
-import 'package:front_scaffold_flutter_v2/domain/entities/user.dart';
-import 'package:front_scaffold_flutter_v2/data/data.dart';
+import 'package:todo_app/domain/entities/user.dart';
+import 'package:todo_app/data/data.dart';
 import 'json_serializable.dart';
 
 /// A concrete implementation of the [User] entity that can be serialized to JSON.

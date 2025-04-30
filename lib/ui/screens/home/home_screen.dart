@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:front_scaffold_flutter_v2/ui/widgets/widgets.dart';
+import 'package:todo_app/ui/widgets/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:front_scaffold_flutter_v2/config/config.dart';
-import 'package:front_scaffold_flutter_v2/ui/shared/shared.dart';
-import 'package:front_scaffold_flutter_v2/ui/screens/home/expanded_layout/home_screen_expanded_layout.dart';
-import 'package:front_scaffold_flutter_v2/ui/screens/home/medium_layout/home_screen_medium_layout.dart';
+import 'package:todo_app/config/config.dart';
+import 'package:todo_app/ui/shared/shared.dart';
+import 'package:todo_app/ui/screens/home/expanded_layout/home_screen_expanded_layout.dart';
+import 'package:todo_app/ui/screens/home/medium_layout/home_screen_medium_layout.dart';
 import './widgets/drawer_home.dart';
 
 class HomeScreen extends StatelessWidget {

@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:front_scaffold_flutter_v2/api/api.dart';
-import 'package:front_scaffold_flutter_v2/data/data.dart';
-import 'package:front_scaffold_flutter_v2/domain/usecases/auth_usecase.dart';
-import 'package:front_scaffold_flutter_v2/ui/shared/service/service.dart';
+import 'package:todo_app/api/api.dart';
+import 'package:todo_app/data/data.dart';
+import 'package:todo_app/domain/usecases/auth_usecase.dart';
+import 'package:todo_app/ui/shared/service/service.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

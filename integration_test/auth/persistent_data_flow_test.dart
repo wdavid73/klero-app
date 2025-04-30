@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:front_scaffold_flutter_v2/config/config.dart';
-import 'package:front_scaffold_flutter_v2/data/data.dart';
-import 'package:front_scaffold_flutter_v2/ui/blocs/auth/auth_bloc.dart';
-import 'package:front_scaffold_flutter_v2/ui/cubits/cubits.dart';
-import 'package:front_scaffold_flutter_v2/ui/screens/screens.dart';
+import 'package:todo_app/config/config.dart';
+import 'package:todo_app/data/data.dart';
+import 'package:todo_app/ui/blocs/auth/auth_bloc.dart';
+import 'package:todo_app/ui/cubits/cubits.dart';
+import 'package:todo_app/ui/screens/screens.dart';
 import 'package:go_router/go_router.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:mocktail/mocktail.dart';

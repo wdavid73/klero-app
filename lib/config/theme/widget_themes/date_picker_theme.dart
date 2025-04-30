@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_scaffold_flutter_v2/config/theme/theme.dart';
+import 'package:todo_app/config/theme/theme.dart';
 import 'text_theme.dart';
 
 final baseDatePickerTheme = DatePickerThemeData(
