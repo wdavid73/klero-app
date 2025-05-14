@@ -1,12 +1,13 @@
 import 'en_form_validation.dart';
 import 'en_form_texts.dart';
-import 'en_introduction.dart';
+import 'features/en_introduction.dart';
+import 'features/en_task.dart';
 
 Map<String, String> enBase = {
   'name': 'Name',
   'email': 'Email',
   'email_address': 'Email Address',
-  'home': 'Home',
+  'home': 'ToDo List',
   // AUTH
   'sign_in_account': 'Sign in to your account',
   'login': 'Login',
@@ -53,6 +54,7 @@ Map<String, String> enBase = {
   'delete': 'Delete',
   'close': 'Close',
   'open': 'Open',
+  'edit': 'Edit',
   'register_success': 'Register Successfully',
   'register_error': 'An error occurred during registration!',
   'not_user': 'Not User',
@@ -78,4 +80,5 @@ Map<String, String> enMap = {
   ...formValidations,
   ...formTexts,
   ...introduction,
+  ...enTask,
 };

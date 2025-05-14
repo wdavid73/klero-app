@@ -1,9 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/api/api.dart';
-import 'package:todo_app/data/data.dart';
-import 'package:todo_app/ui/blocs/auth/auth_bloc.dart';
+import 'package:klero_app/api/api.dart';
+import 'package:klero_app/data/data.dart';
+import 'package:klero_app/ui/blocs/auth/auth_bloc.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'mocks/mock_auth_bloc_dependencies.dart';

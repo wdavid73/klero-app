@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/api/api.dart';
-import 'package:todo_app/data/data.dart';
-import 'package:todo_app/domain/usecases/auth_usecase.dart';
-import 'package:todo_app/ui/shared/service/service.dart';
+import 'package:klero_app/api/api.dart';
+import 'package:klero_app/data/data.dart';
+import 'package:klero_app/domain/usecases/auth_usecase.dart';
+import 'package:klero_app/ui/shared/service/service.dart';
 
+part 'auth_bloc_handler.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
-part 'auth_bloc_handler.dart';
 
 /// A BLoC (Business Logic Component) for managing authentication-related events and states.
 ///

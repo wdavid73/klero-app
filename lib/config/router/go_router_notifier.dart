@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
-import 'package:todo_app/ui/blocs/blocs.dart';
+import 'package:klero_app/ui/blocs/blocs.dart';
 
 /// A [ChangeNotifier] that listens to changes in the authentication state and
 /// notifies its listeners when the state changes.

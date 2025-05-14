@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/config/theme/responsive.dart';
+import 'package:klero_app/config/theme/responsive.dart';
 
 enum DeviceType { phone, tablet, other }
 
@@ -12,6 +12,8 @@ class AdaptiveScaffold extends StatelessWidget {
   final Widget? navigationRail;
   final Widget? navigationDrawer;
   final Widget? drawer;
+  final Widget? floatingActionButton;
+  final Color? scaffoldBackgroundColor;
 
   const AdaptiveScaffold({
     super.key,
@@ -23,6 +25,8 @@ class AdaptiveScaffold extends StatelessWidget {
     this.navigationRail,
     this.navigationDrawer,
     this.drawer,
+    this.floatingActionButton,
+    this.scaffoldBackgroundColor,
   });
 
   DeviceType _getDeviceType(double shortestSide) {
@@ -39,6 +43,7 @@ class AdaptiveScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar,
+      backgroundColor: scaffoldBackgroundColor,
       drawer: (context.width < 900 && drawer != null) ? drawer : null,
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -64,6 +69,7 @@ class AdaptiveScaffold extends StatelessWidget {
         bottomNavigationBar: bottomNavigationBar,
         widthScreen: context.width,
       ),
+      floatingActionButton: floatingActionButton,
     );
   }
 

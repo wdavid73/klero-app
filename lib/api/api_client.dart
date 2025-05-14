@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:todo_app/api/api.dart';
-import 'package:todo_app/config/config.dart';
-import 'package:todo_app/ui/shared/service/service.dart';
+import 'package:klero_app/api/api.dart';
+import 'package:klero_app/config/config.dart';
+import 'package:klero_app/ui/shared/service/service.dart';
 
 /// Handles HTTP requests to the API.
 ///

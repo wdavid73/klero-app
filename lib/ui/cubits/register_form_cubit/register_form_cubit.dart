@@ -1,9 +1,9 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:todo_app/ui/blocs/blocs.dart';
-import 'package:todo_app/ui/shared/inputs/inputs.dart';
-import 'package:todo_app/utils/utils.dart';
+import 'package:klero_app/ui/blocs/blocs.dart';
+import 'package:klero_app/ui/shared/inputs/inputs.dart';
+import 'package:klero_app/utils/utils.dart';
 
 part 'register_form_state.dart';
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/config/config.dart';
+import 'package:klero_app/config/config.dart';
+
 import 'text_theme.dart';
 
 final _baseBorderSideInput = BorderSide(
@@ -20,7 +21,7 @@ final baseInputDecorationTheme = InputDecorationTheme(
   helperStyle: baseTextTheme.bodySmall,
   errorStyle: baseTextTheme.bodySmall?.copyWith(color: ColorTheme.error),
   counterStyle: baseTextTheme.bodySmall,
-  contentPadding: const EdgeInsets.all(8),
+  contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
   suffixIconColor: ColorTheme.secondaryColor,
   enabledBorder: _baseOutlineInputBorder,
   disabledBorder: _baseOutlineInputBorder.copyWith(
@@ -54,6 +55,7 @@ final baseInputDecorationDarkTheme = baseInputDecorationTheme.copyWith(
   counterStyle: baseTextThemeDark.bodySmall,
   suffixIconColor: ColorTheme.lightPrimaryColor,
   prefixIconColor: ColorTheme.white,
+  contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
   enabledBorder: _baseOutlineInputBorder.copyWith(
     borderSide: _baseBorderSideInput.copyWith(
       color: ColorTheme.lightPrimaryColor,

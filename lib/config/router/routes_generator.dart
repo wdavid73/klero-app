@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_app/ui/screens/screens.dart';
-import 'package:todo_app/ui/views/views.dart';
+import 'package:klero_app/ui/screens/screens.dart';
+
 import 'routes_constants.dart';
 import 'routes_transitions.dart';
 
@@ -21,14 +21,14 @@ class AppRoutes {
   ///   - A [List] of [RouteBase] objects representing the application's routes.
   static List<RouteBase> getAppRoutes() {
     return [
-      ///* SPLASH SCREEN
+      /// SPLASH SCREEN
       GoRoute(
         path: RouteConstants.splash,
         name: "splash",
         builder: (context, state) => const CheckAuthStatusScreen(),
       ),
 
-      ///* HOME ROUTE
+      /// HOME ROUTE
       GoRoute(
         path: RouteConstants.home,
         name: "home",
@@ -46,72 +46,33 @@ class AppRoutes {
         ),
       ),
 
-      /// ONBOARDING ROUTE
+      /// CREATE TASK ROUTE
       GoRoute(
-        path: RouteConstants.onboardingScreen,
-        name: "onboarding",
-        pageBuilder: (_, __) => _transitionPage(
-          child: const OnBoardingScreen(),
-          transitionType: TransitionType.fade,
-        ),
-      ),
-
-      ///* WIDGET SCREEN
-      GoRoute(
-        path: RouteConstants.widgetsScreen,
+        path: "${RouteConstants.createTaskScreen}/:id",
+        name: "task",
         pageBuilder: (context, state) => _transitionPage(
-          child: const WidgetsScreen(),
+          child: TaskScreen(
+            taskId: state.pathParameters['id'] ?? 'no-id',
+          ),
           transitionType: TransitionType.slideRight,
         ),
-        routes: [
-          GoRoute(
-            path: RouteConstants.textStylesView,
-            name: 'text_styles_view',
-            builder: (context, state) => TextStylesView(),
-          ),
-          GoRoute(
-            path: RouteConstants.inputsView,
-            name: 'inputs_view',
-            builder: (context, state) => InputsWidget(),
-          ),
-          GoRoute(
-            path: RouteConstants.selectableWidgetView,
-            name: 'selectable_widget_view',
-            builder: (context, state) => SelectableWidgetView(),
-          ),
-          GoRoute(
-            path: RouteConstants.drawerView,
-            name: 'drawer_view',
-            builder: (context, state) => DrawerView(),
-          ),
-          GoRoute(
-            path: RouteConstants.buttonsView,
-            name: 'buttons_view',
-            builder: (context, state) => ButtonsView(),
-          ),
-          GoRoute(
-            path: RouteConstants.bottomSheetView,
-            name: 'bottom_sheet_view',
-            builder: (context, state) => BottomSheetView(),
-          ),
-        ],
       ),
 
-      GoRoute(
-        path: RouteConstants.exampleService,
-        builder: (context, state) => const ExampleServiceScreen(),
-      ),
-
-      ///* AUTH ROUTES
+      /// LOGIN ROUTE
       GoRoute(
         path: RouteConstants.loginScreen,
         name: "login",
         builder: (context, state) => const LoginScreen(),
       ),
+
+      /// REGISTER ROUTE
       GoRoute(
         path: RouteConstants.registerScreen,
         name: "register",
-        builder: (context, state) => const RegisterScreen(),
+        pageBuilder: (context, state) => _transitionPage(
+          child: const RegisterScreen(),
+          transitionType: TransitionType.slideRight,
+        ),
       ),
     ];
   }

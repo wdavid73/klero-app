@@ -1,0 +1,22 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "klero-app",
+          "appId": "1:502748638500:android:29bc4fe203c88e5bee57b1",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "klero-app",
+          "configurations": {
+            "android": "1:502748638500:android:29bc4fe203c88e5bee57b1",
+            "ios": "1:502748638500:ios:b4d08d724bf624d6ee57b1"
+          }
+        }
+      }
+    }
+  }
+}

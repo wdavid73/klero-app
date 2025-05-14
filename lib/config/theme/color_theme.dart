@@ -7,9 +7,9 @@ class ColorTheme {
   static Color iconsColor = HexColor.fromHex("#FFFFFF");
 
   // Color of theme
-  static Color primaryColor = HexColor.fromHex("#3F51B5");
-  static Color lightPrimaryColor = HexColor.fromHex("#C5CAE9");
-  static Color secondaryColor = HexColor.fromHex("#303F9F");
+  static Color primaryColor = HexColor.fromHex("#673AB7");
+  static Color lightPrimaryColor = HexColor.fromHex("#D1C4E9");
+  static Color secondaryColor = HexColor.fromHex("#512DA8");
   static Color accentColor = HexColor.fromHex("#00BCD4");
 
   // Backgrounds of theme

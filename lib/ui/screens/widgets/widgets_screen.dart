@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/config/config.dart';
-import 'package:todo_app/ui/widgets/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:klero_app/config/config.dart';
+import 'package:klero_app/ui/widgets/widgets.dart';
 
 class WidgetsScreen extends StatelessWidget {
   const WidgetsScreen({super.key});

@@ -18,6 +18,9 @@ class RouteConstants {
   /// The path for the onboarding screen
   static const String onboardingScreen = '/onboarding';
 
+  /// The path for the create task screen
+  static const String createTaskScreen = '/task';
+
   // ----------- EXAMPLES ----------- //
   /// The path for the example service screen.
   static const String exampleService = '/example_service';

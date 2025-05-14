@@ -1,11 +1,12 @@
-import 'package:todo_app/config/config.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'firebase_options.dart';
 
 class AppInitializer {
   static Future<void> init() async {
     /// Initializes environment variables required for the app.
-    await Environment.initEnvironment();
+    // await Environment.initEnvironment();
 
     /// Configures the HydratedBloc storage.
     final storage = await HydratedStorage.build(
@@ -17,8 +18,13 @@ class AppInitializer {
     /// Sets the storage for HydratedBloc.
     HydratedBloc.storage = storage;
 
+    /// Initialize firebase
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+
     /// You can add more initialization tasks here.
-    /// Example: await Firebase.initializeApp();
+
     /// Example: await Hive.initFlutter();
     /// Example: await GetStorage.init();
   }

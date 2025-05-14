@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/config/config.dart';
-import 'package:todo_app/ui/cubits/cubits.dart';
-import 'package:todo_app/ui/widgets/widgets.dart';
+import 'package:klero_app/config/config.dart';
+import 'package:klero_app/ui/cubits/cubits.dart';
+import 'package:klero_app/ui/widgets/widgets.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -11,7 +11,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings"),
+        title: Text(context.translate("settings")),
       ),
       body: SafeArea(
         child: Container(
@@ -32,7 +32,7 @@ class SettingsScreen extends StatelessWidget {
                 title: context.translate('delete_account'),
                 icon: Icons.delete_forever_rounded,
               ),
-              const SizedBox(height: 20),
+              /* const SizedBox(height: 20),
               Text(
                 context.translate('feedback'),
                 style: context.textTheme.titleSmall,
@@ -45,6 +45,7 @@ class SettingsScreen extends StatelessWidget {
                 title: context.translate('send_feedback'),
                 icon: Icons.send_rounded,
               ),
+              */
               const SizedBox(height: 20),
               Text(
                 context.translate('theme'),

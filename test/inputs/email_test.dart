@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/ui/shared/inputs/inputs.dart';
+import 'package:klero_app/ui/shared/inputs/inputs.dart';
 
 void main() {
   group("Email", () {

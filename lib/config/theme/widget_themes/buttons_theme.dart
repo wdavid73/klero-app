@@ -73,3 +73,5 @@ final baseFilledButtonTheme = FilledButtonThemeData(
 
 /// Base theme for IconButton. In this case, it doesn't specify any customization but can be extended.
 final baseIconButtonTheme = IconButtonThemeData();
+
+final baseIconButtonThemeDark = IconButtonThemeData();

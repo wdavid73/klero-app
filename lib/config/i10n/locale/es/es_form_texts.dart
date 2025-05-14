@@ -8,5 +8,5 @@ Map<String, String> formTexts = {
   'confirm_password_label': 'Confirmar contraseña',
   'confirm_password_hint': 'Confirmar tu contraseña',
   'select_an_option': 'Selecciona una opción',
-  'select_an_option_disabled': 'Seleccionar una opción esta deshabilitada'
+  'select_an_option_disabled': 'Seleccionar una opción esta deshabilitada',
 };

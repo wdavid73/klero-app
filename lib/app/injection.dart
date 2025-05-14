@@ -1,11 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/api/api.dart';
-import 'package:todo_app/data/data.dart';
-import 'package:todo_app/domain/repositories/repositories.dart';
-import 'package:todo_app/domain/usecases/usecases.dart';
-import 'package:todo_app/ui/blocs/blocs.dart';
-import 'package:todo_app/ui/cubits/cubits.dart';
-import 'package:todo_app/ui/shared/service/service.dart';
+/* import 'package:klero_app/api/api.dart'; */
+import 'package:klero_app/data/data.dart';
+import 'package:klero_app/data/datasources/firebase_auth_datasource.dart';
+import 'package:klero_app/domain/repositories/repositories.dart';
+import 'package:klero_app/domain/usecases/usecases.dart';
+import 'package:klero_app/ui/blocs/blocs.dart';
+import 'package:klero_app/ui/cubits/cubits.dart';
+import 'package:klero_app/ui/shared/service/service.dart';
 
 class AppInjection {
   /// Builds and provides a list of `RepositoryProvider` instances.
@@ -24,7 +26,8 @@ class AppInjection {
       /// The [AuthUseCase] depends on the [AuthRepository] for its logic.
       RepositoryProvider<AuthRepository>(
         create: (_) => AuthRepositoryImpl(
-          ApiAuthDataSource(ApiClient.instance),
+          /* ApiAuthDataSource(ApiClient.instance), */
+          FirebaseAuthDataSource(FirebaseAuth.instance),
         ),
       ),
 
@@ -32,20 +35,6 @@ class AppInjection {
       RepositoryProvider<AuthUseCase>(
         create: (context) => AuthUseCase(
           context.read<AuthRepository>(),
-        ),
-      ),
-
-      /// Provides `ProductsRepository`, which handles product-related operations.
-      RepositoryProvider<ProductsRepository>(
-        create: (_) => ProductsRepositoryImpl(
-          ApiProductDataSource(ApiClient.instance),
-        ),
-      ),
-
-      /// Provides `ProductsUseCase`, which contains business logic for managing products.
-      RepositoryProvider<ProductsUseCase>(
-        create: (context) => ProductsUseCase(
-          context.read(),
         ),
       ),
     ];
@@ -62,13 +51,6 @@ class AppInjection {
     return [
       /// Provides the `SettingsCubit`, which manages the app's settings.
       BlocProvider<ThemeModeCubit>(create: (context) => ThemeModeCubit()),
-
-      /// Provides the `IntroductionCubit`, which introduction screen
-      BlocProvider<IntroductionCubit>(
-        create: (context) => IntroductionCubit(
-          KeyValueStorageServiceImpl(),
-        ),
-      ),
 
       /// Provides the `AuthBloc`, responsible for handling authentication logic.
       BlocProvider<AuthBloc>(
@@ -94,14 +76,18 @@ class AppInjection {
         lazy: false,
       ),
 
-      // EXAMPLE BLOC
-      // Provides the `ProductsBloc`, which manages product-related state.
-      BlocProvider<ProductsBloc>(
-        create: (context) => ProductsBloc(
-          context.read(), // Injects required dependencies automatically.
-        ),
+      BlocProvider<TaskBloc>(
+        // Injects required dependencies automatically.
+        create: (context) => TaskBloc(),
         lazy: false, // Lazy initialization of the bloc.
       ),
+
+      BlocProvider<CreateTaskCubit>(
+        create: (context) => CreateTaskCubit(
+          taskBloc: context.read<TaskBloc>(),
+        ),
+        lazy: false,
+      )
     ];
   }
 }

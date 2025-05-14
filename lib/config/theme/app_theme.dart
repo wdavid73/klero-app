@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/config/config.dart';
-import 'package:todo_app/config/theme/widget_themes/date_picker_theme.dart';
+import 'package:klero_app/config/config.dart';
+import 'package:klero_app/config/theme/widget_themes/date_picker_theme.dart';
+
 import './widget_themes/widget_themes.dart';
 
 class AppTheme {
@@ -56,11 +57,12 @@ class AppTheme {
 
   /// Base AppBarTheme. Used as a starting point for customizing the app bar in both light and dark themes.
   static final _baseAppBarTheme = AppBarTheme(
-    centerTitle: true,
-    elevation: 5,
+    centerTitle: false,
+    elevation: 0,
     iconTheme: _baseIconTheme.copyWith(color: ColorTheme.iconsColor),
-    titleTextStyle:
-        baseTextTheme.titleMedium?.copyWith(color: ColorTheme.white),
+    titleTextStyle: baseTextTheme.titleLarge?.copyWith(
+      color: ColorTheme.textPrimary,
+    ),
   );
 
   /// Base ChipThemeData. Used as a starting point for customizing the chip styles in both light and dark themes.
@@ -92,8 +94,13 @@ class AppTheme {
   /// Base CardTheme. Used as a starting point for customizing the card styles in both light and dark themes.
   /// The shape is set to a rounded rectangle with a 20-pixel border radius.
   static final _baseCardTheme = CardTheme(
+    elevation: 0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(20),
+      side: BorderSide(
+        color: ColorTheme.textPrimary,
+        width: 2,
+      ),
     ),
   );
 
@@ -225,6 +232,17 @@ class AppTheme {
     elevation: 5,
   );
 
+  ///
+  static final _basePopupMenuThemeData = PopupMenuThemeData(
+    iconColor: ColorTheme.accentColor,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20),
+    ),
+    menuPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+    color: ColorTheme.lightPrimaryColor,
+    position: PopupMenuPosition.over,
+  );
+
   static ThemeData getTheme(BuildContext context) => ThemeData(
         useMaterial3: true,
         colorScheme: _colorScheme,
@@ -234,9 +252,10 @@ class AppTheme {
           size: context.dp(1.8),
         ),
         appBarTheme: _baseAppBarTheme.copyWith(
-          backgroundColor: ColorTheme.secondaryColor,
+          backgroundColor: ColorTheme.white,
+          surfaceTintColor: ColorTheme.primaryColor,
           iconTheme: _baseIconTheme.copyWith(
-            color: ColorTheme.white,
+            color: ColorTheme.secondaryColor,
           ),
         ),
         cardTheme: _baseCardTheme.copyWith(
@@ -254,6 +273,7 @@ class AppTheme {
         outlinedButtonTheme: baseOutlinedButtonTheme,
         filledButtonTheme: baseFilledButtonTheme,
         floatingActionButtonTheme: _baseFABTheme,
+        iconButtonTheme: baseIconButtonTheme,
         drawerTheme: _baseDrawerTheme,
         listTileTheme: _baseListTileTheme,
         snackBarTheme: _baseSnackBarTheme,
@@ -276,6 +296,9 @@ class AppTheme {
             ),
           ),
         ),
+        popupMenuTheme: _basePopupMenuThemeData.copyWith(
+          iconSize: context.dp(3),
+        ),
       );
 
   static ThemeData getDarkTheme(BuildContext context) => ThemeData(
@@ -284,6 +307,9 @@ class AppTheme {
         fontFamily: AppTypography.fontFamily,
         appBarTheme: _baseAppBarTheme.copyWith(
           backgroundColor: ColorTheme.backgroundColorDark,
+          titleTextStyle: _baseAppBarTheme.titleTextStyle?.copyWith(
+            color: ColorTheme.white,
+          ),
         ),
         iconTheme: _baseIconTheme.copyWith(
           color: ColorTheme.lightPrimaryColor,
@@ -291,6 +317,13 @@ class AppTheme {
         ),
         cardTheme: _baseCardTheme.copyWith(
           color: ColorTheme.backgroundColorDark,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(
+              color: ColorTheme.white,
+              width: 2,
+            ),
+          ),
         ),
         dividerTheme: _baseDividerTheme,
         chipTheme: _baseChipTheme.copyWith(
@@ -305,6 +338,7 @@ class AppTheme {
         floatingActionButtonTheme: _baseFABTheme.copyWith(
           foregroundColor: ColorTheme.white,
         ),
+        iconButtonTheme: baseIconButtonThemeDark,
         drawerTheme: _baseDrawerTheme.copyWith(
           backgroundColor: ColorTheme.backgroundColorDark,
           scrimColor: ColorTheme.lightPrimaryColor.withValues(alpha: 0.5),
@@ -376,6 +410,9 @@ class AppTheme {
               color: ColorTheme.lightPrimaryColor,
             ),
           ),
+        ),
+        popupMenuTheme: _basePopupMenuThemeData.copyWith(
+          iconSize: context.dp(3),
         ),
       );
 

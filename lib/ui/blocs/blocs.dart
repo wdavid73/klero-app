@@ -1,2 +1,2 @@
-export 'products/products_bloc.dart';
 export 'auth/auth_bloc.dart';
+export 'task/task_bloc.dart';

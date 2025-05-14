@@ -62,6 +62,8 @@ class CustomTextFormField extends StatelessWidget {
 
   final Key? textFormFieldKey;
 
+  final int? maxLines;
+
   /// Creates a [CustomTextFormField].
   const CustomTextFormField({
     super.key,
@@ -84,6 +86,7 @@ class CustomTextFormField extends StatelessWidget {
     this.initialValue,
     this.helperText,
     this.textFormFieldKey,
+    this.maxLines = 1,
   });
 
   /// Returns true if the text field is a password field.
@@ -105,6 +108,7 @@ class CustomTextFormField extends StatelessWidget {
         enabled: enabled,
         autofillHints: autofillHints,
         initialValue: initialValue,
+        maxLines: maxLines,
         decoration: InputDecoration(
           labelText: label,
           hintText: hint,

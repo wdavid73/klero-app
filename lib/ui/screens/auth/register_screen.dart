@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/config/config.dart';
-import 'package:todo_app/ui/blocs/blocs.dart';
-import 'package:todo_app/ui/cubits/cubits.dart';
-import 'package:todo_app/ui/widgets/widgets.dart';
+import 'package:klero_app/config/config.dart';
+import 'package:klero_app/ui/blocs/blocs.dart';
+import 'package:klero_app/ui/cubits/cubits.dart';
+import 'package:klero_app/ui/widgets/widgets.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -16,9 +16,7 @@ class RegisterScreen extends StatelessWidget {
         surfaceTintColor: Colors.transparent,
         title: Text(
           "Register",
-          style: context.textTheme.titleLarge?.copyWith(
-            color: ColorTheme.white,
-          ),
+          style: context.textTheme.titleLarge,
         ),
       ),
       extendBodyBehindAppBar: true,
@@ -38,7 +36,7 @@ class _RegisterView extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/login_background.jpg'),
+          image: AssetImage('assets/images/auth_background.jpg'),
           fit: BoxFit.cover,
         ),
       ),
@@ -137,6 +135,7 @@ class _FormSignUp extends StatelessWidget {
             onChanged: registerCubit.emailChanged,
             errorMessage: context.translate('${email.errorMessage}'),
             initialValue: registerCubit.state.email.value,
+            keyboardType: TextInputType.emailAddress,
           ),
           CustomTextFormField(
             textFormFieldKey: const Key("password_field"),

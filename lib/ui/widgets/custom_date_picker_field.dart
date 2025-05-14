@@ -41,6 +41,10 @@ class CustomDatePickerField extends StatefulWidget {
   /// The last date to display in the date picker.
   final DateTime? lastDate;
 
+  final Widget? suffixIcon;
+
+  final Function(DateTime)? onChanged;
+
   const CustomDatePickerField({
     super.key,
     required this.hintText,
@@ -55,6 +59,8 @@ class CustomDatePickerField extends StatefulWidget {
     this.firstDate,
     this.lastDate,
     this.initialDate,
+    this.suffixIcon,
+    this.onChanged,
   });
 
   @override
@@ -67,6 +73,7 @@ class _CustomDatePickerFieldState extends State<CustomDatePickerField> {
   @override
   void initState() {
     _internalController = widget.controller ?? TextEditingController();
+    if (widget.initialDate != null) _updateControllerText(widget.initialDate!);
     super.initState();
   }
 
@@ -101,6 +108,9 @@ class _CustomDatePickerFieldState extends State<CustomDatePickerField> {
       initialEntryMode: widget.initialEntryMode,
     );
     _updateControllerText(picked);
+    if (widget.onChanged != null && picked != null) {
+      widget.onChanged!(picked);
+    }
   }
 
   @override
@@ -114,6 +124,7 @@ class _CustomDatePickerFieldState extends State<CustomDatePickerField> {
         labelText: widget.label,
         helperText: widget.helpText,
         errorText: widget.errorMessage != '' ? widget.errorMessage : null,
+        suffixIcon: widget.suffixIcon,
       ),
     );
   }

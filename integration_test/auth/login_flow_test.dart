@@ -3,19 +3,17 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:klero_app/api/api.dart';
+import 'package:klero_app/config/config.dart';
+import 'package:klero_app/data/data.dart';
+import 'package:klero_app/ui/blocs/blocs.dart';
+import 'package:klero_app/ui/cubits/cubits.dart';
+import 'package:klero_app/ui/screens/screens.dart';
+import 'package:klero_app/ui/shared/inputs/inputs.dart';
 import 'package:mocktail/mocktail.dart';
-
-import 'package:todo_app/config/config.dart';
-import 'package:todo_app/ui/blocs/blocs.dart';
-import 'package:todo_app/ui/cubits/cubits.dart';
-import 'package:todo_app/ui/screens/screens.dart';
-import 'package:todo_app/api/api.dart';
-import 'package:todo_app/data/data.dart';
-import 'package:todo_app/ui/shared/inputs/inputs.dart';
 
 import './mocks/auth_flow_dependencies.dart';
 

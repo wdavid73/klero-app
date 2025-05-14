@@ -1,4 +1,4 @@
-import 'package:todo_app/api/api.dart';
+import 'package:klero_app/api/api.dart';
 
 /// Defines the contract for authentication-related operations.
 ///
@@ -47,4 +47,6 @@ abstract class AuthDataSource {
   ///   - [token]: The authentication token to verify.
   ///
   Future<ResponseState> checkAuthStatus(String token);
+
+  Future<void> logout();
 }

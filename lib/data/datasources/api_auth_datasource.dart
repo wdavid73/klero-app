@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:todo_app/api/api.dart';
-import 'package:todo_app/data/data.dart';
-import 'package:todo_app/domain/datasources/auth_datasource.dart';
+import 'package:klero_app/api/api.dart';
+import 'package:klero_app/data/data.dart';
+import 'package:klero_app/domain/datasources/auth_datasource.dart';
 
 /// Example JSON response for login and checkAuthStatus:
 ///
@@ -127,5 +127,10 @@ class ApiAuthDataSource implements AuthDataSource {
         ),
       );
     }
+  }
+
+  @override
+  Future<void> logout() {
+    throw UnimplementedError();
   }
 }

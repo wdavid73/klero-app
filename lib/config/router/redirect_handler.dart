@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
-import 'package:todo_app/ui/blocs/blocs.dart';
+import 'package:klero_app/ui/blocs/blocs.dart';
+
 import 'go_router_notifier.dart';
 import 'routes_constants.dart';
 
@@ -84,11 +85,11 @@ String? _handleAuthenticatedRedirect(String currentPath) {
 ///
 /// Returns:
 ///   - A [String] representing the path to redirect to, or `null` if no redirection is needed.
-String? appRedirect(
-  GoRouterNotifier goRouterNotifier,
-  GoRouterState state,
-  bool isOnboardingCompleted,
-) {
+String? appRedirect({
+  required GoRouterNotifier goRouterNotifier,
+  required GoRouterState state,
+  bool isOnboardingCompleted = true,
+}) {
   final currentPath = state.uri.path;
   final authStatus = goRouterNotifier.authStatus;
 

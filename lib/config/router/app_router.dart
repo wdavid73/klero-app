@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
-import 'package:todo_app/ui/blocs/blocs.dart';
+import 'package:klero_app/ui/blocs/blocs.dart';
+
 import 'go_router_notifier.dart';
 import 'redirect_handler.dart';
 import 'routes_constants.dart';
@@ -19,14 +20,14 @@ import 'routes_generator.dart';
 /// Returns:
 ///   - A configured [GoRouter] instance ready to be used in the application.
 GoRouter createAppRouter(AuthBloc authBloc) {
-  /* final goRouterNotifier = GoRouterNotifier(authBloc); */
+  final goRouterNotifier = GoRouterNotifier(authBloc);
 
   return GoRouter(
-    initialLocation: RouteConstants.home,
+    initialLocation: RouteConstants.splash,
     routes: AppRoutes.getAppRoutes(),
-    /* refreshListenable: goRouterNotifier, */
-    /* redirect: (context, state) {
-      final introductionCubit = BlocProvider.of<IntroductionCubit>(
+    refreshListenable: goRouterNotifier,
+    redirect: (context, state) {
+      /* final introductionCubit = BlocProvider.of<IntroductionCubit>(
         context,
         listen: false,
       );
@@ -41,9 +42,13 @@ GoRouter createAppRouter(AuthBloc authBloc) {
       if (!isOnboardingCompleted &&
           currentPath != RouteConstants.onboardingScreen) {
         return RouteConstants.onboardingScreen;
-      }
+      } */
 
-      return appRedirect(goRouterNotifier, state, isOnboardingCompleted);
-    }, */
+      return appRedirect(
+        goRouterNotifier: goRouterNotifier,
+        state: state,
+        isOnboardingCompleted: true,
+      );
+    },
   );
 }

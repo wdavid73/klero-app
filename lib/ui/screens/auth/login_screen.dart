@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/config/config.dart';
-import 'package:todo_app/ui/blocs/blocs.dart';
-import 'package:todo_app/ui/cubits/cubits.dart';
-import 'package:todo_app/ui/widgets/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:klero_app/config/config.dart';
+import 'package:klero_app/ui/blocs/blocs.dart';
+import 'package:klero_app/ui/cubits/cubits.dart';
+import 'package:klero_app/ui/widgets/widgets.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -17,9 +17,7 @@ class LoginScreen extends StatelessWidget {
         surfaceTintColor: Colors.transparent,
         title: Text(
           context.translate('login'),
-          style: context.textTheme.titleLarge?.copyWith(
-            color: ColorTheme.white,
-          ),
+          style: context.textTheme.titleLarge,
         ),
       ),
       extendBodyBehindAppBar: true,
@@ -39,7 +37,7 @@ class _LoginView extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/login_background.jpg'),
+          image: AssetImage('assets/images/auth_background.jpg'),
           fit: BoxFit.cover,
         ),
       ),
@@ -163,25 +161,6 @@ class _ButtonsOtherSignIn extends StatelessWidget {
             ],
           ),
         ),
-        FilledButton(
-          onPressed: () {},
-          style: buttonStyle,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPictureCustom(
-                iconPath: 'assets/icon/icon_apple.svg',
-                iconSize: iconSize,
-              ),
-              const SizedBox(width: 10),
-              Text(
-                context.translate('sign_in_with_apple'),
-                style: textStyle,
-              ),
-            ],
-          ),
-        )
       ],
     );
   }
@@ -243,6 +222,7 @@ class _FormSignIn extends StatelessWidget {
             onChanged: signInForm.emailChanged,
             errorMessage: context.translate("${email.errorMessage}"),
             initialValue: signInForm.state.email.value,
+            keyboardType: TextInputType.emailAddress,
           ),
           CustomTextFormField(
             textFormFieldKey: Key("password_field"),

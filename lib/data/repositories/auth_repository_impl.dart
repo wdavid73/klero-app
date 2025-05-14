@@ -1,6 +1,6 @@
-import 'package:todo_app/api/api.dart';
-import 'package:todo_app/domain/datasources/auth_datasource.dart';
-import 'package:todo_app/domain/repositories/auth_repository.dart';
+import 'package:klero_app/api/api.dart';
+import 'package:klero_app/domain/datasources/auth_datasource.dart';
+import 'package:klero_app/domain/repositories/auth_repository.dart';
 
 /// Implementation of [AuthRepository] that interacts with an authentication data source.
 ///
@@ -60,5 +60,10 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<ResponseState> register(
       String email, String password, String fullName) {
     return datasource.register(email, password, fullName);
+  }
+
+  @override
+  Future<void> logout() {
+    return datasource.logout();
   }
 }

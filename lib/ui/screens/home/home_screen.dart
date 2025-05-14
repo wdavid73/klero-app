@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/ui/widgets/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todo_app/config/config.dart';
-import 'package:todo_app/ui/shared/shared.dart';
-import 'package:todo_app/ui/screens/home/expanded_layout/home_screen_expanded_layout.dart';
-import 'package:todo_app/ui/screens/home/medium_layout/home_screen_medium_layout.dart';
-import './widgets/drawer_home.dart';
+import 'package:klero_app/config/config.dart';
+import 'package:klero_app/domain/entities/task.dart';
+import 'package:klero_app/ui/blocs/blocs.dart';
+import 'package:klero_app/ui/screens/home/widgets/drawer_home.dart';
+import 'package:klero_app/ui/shared/styles/app_spacing.dart';
+import 'package:klero_app/ui/widgets/widgets.dart';
+
+import './widgets/filter_tag.dart';
+import './widgets/task_item.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,26 +19,23 @@ class HomeScreen extends StatelessWidget {
     return AdaptiveScaffold(
       appBar: _appBarHome(context),
       drawer: DrawerHome(),
-      bottomNavigationBar: _BottomNavigationBar(),
-      navigationRail: _MediumNavigationRailHome(),
-      navigationDrawer: _ExpandedNavigationDrawerHome(),
-      expandedLayout: HomeScreenExpandedLayout(),
-      mediumLayout: HomeScreenMediumLayout(),
+      floatingActionButton: FloatingActionButton(
+        /* onPressed: () => context.push("/task/new"), */
+        onPressed: () {
+          context.read<TaskBloc>().createMultiple();
+        },
+        child: Icon(
+          Icons.add,
+          size: context.dp(2.6),
+        ),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Center(
-            child: FlutterLogo(
-              size: context.dp(30),
-            ),
-          ),
-          AppSpacing.md,
-          Text(
-            key: Key("home_title"),
-            context.translate("home"),
-            style: context.textTheme.titleLarge,
-          ),
+          _FilterCategories(),
+          AppSpacing.sm,
+          _ListBody(),
         ],
       ),
     );
@@ -55,7 +56,123 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class _BottomNavigationBar extends StatelessWidget {
+class _FilterCategories extends StatelessWidget {
+  const _FilterCategories();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: context.width,
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        spacing: 10,
+        children: [
+          FilterTag(
+            count: context.select(
+              (TaskBloc cubit) =>
+                  cubit.state.tasks.where((e) => e.type == 'to_do').length,
+            ),
+            isSelected: context.select(
+              (TaskBloc bloc) => bloc.state.filter == 'to_do',
+            ),
+            label: context.translate("to_do"),
+            type: "to_do",
+            onTap: () => context.read<TaskBloc>().filterTags("to_do"),
+          ),
+          FilterTag(
+            count: context.select(
+              (TaskBloc cubit) =>
+                  cubit.state.tasks.where((e) => e.type == 'in_review').length,
+            ),
+            isSelected: context.select(
+              (TaskBloc bloc) => bloc.state.filter == 'in_review',
+            ),
+            label: context.translate("in_review"),
+            type: "in_review",
+            onTap: () => context.read<TaskBloc>().filterTags("in_review"),
+          ),
+          FilterTag(
+            count: context.select(
+              (TaskBloc cubit) =>
+                  cubit.state.tasks.where((e) => e.type == 'complete').length,
+            ),
+            isSelected: context.select(
+              (TaskBloc bloc) => bloc.state.filter == 'complete',
+            ),
+            label: context.translate("complete"),
+            type: "complete",
+            onTap: () => context.read<TaskBloc>().filterTags("complete"),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ListBody extends StatelessWidget {
+  const _ListBody();
+
+  @override
+  Widget build(BuildContext context) {
+    final taskBloc = context.read<TaskBloc>();
+    final taskBlocState = context.watch<TaskBloc>().state;
+
+    List<Task> tasks = taskBlocState.filteredTask.isNotEmpty
+        ? taskBlocState.filteredTask
+        : taskBlocState.tasks;
+
+    if (taskBlocState.isLoading) {
+      return Expanded(
+        child: ShimmerList(),
+      );
+    }
+
+    if (tasks.isNotEmpty) {
+      return Expanded(
+        child: ListView.builder(
+          itemCount: tasks.length,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          itemBuilder: (context, index) {
+            Task task = tasks[index];
+            return TaskItem(
+              title: task.title,
+              description: task.description,
+              isComplete: task.type == 'complete',
+              date: task.date,
+              type: task.type,
+              onSelectOption: (type) {
+                if (type == 'delete') taskBloc.deleteTask(task);
+                if (type == 'edit') context.push("/task/${task.id}");
+                if (type == 'complete') {
+                  taskBloc.promoteTask(promote: "complete", task: task);
+                }
+                if (type == 'in_review') {
+                  taskBloc.promoteTask(promote: "in_review", task: task);
+                }
+              },
+            );
+          },
+        ),
+      );
+    }
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            context.translate("its_empty"),
+            style: context.textTheme.headlineMedium,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+/* class _BottomNavigationBar extends StatelessWidget {
   const _BottomNavigationBar();
 
   @override
@@ -124,3 +241,4 @@ class _ExpandedNavigationDrawerHome extends StatelessWidget {
     );
   }
 }
+ */

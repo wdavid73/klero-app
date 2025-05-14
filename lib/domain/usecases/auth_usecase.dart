@@ -1,4 +1,5 @@
-import 'package:todo_app/api/api.dart';
+import 'package:klero_app/api/api.dart';
+
 import '../repositories/auth_repository.dart';
 
 /// A use case class for handling authentication-related operations.
@@ -57,5 +58,9 @@ class AuthUseCase {
   Future<ResponseState> register(
       String email, String password, String fullName) {
     return repository.register(email, password, fullName);
+  }
+
+  Future<void> logout() {
+    return repository.logout();
   }
 }

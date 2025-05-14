@@ -1,4 +1,4 @@
-import 'package:todo_app/ui/blocs/blocs.dart';
+import 'package:klero_app/ui/blocs/blocs.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockAuthBloc extends Mock implements AuthBloc {}

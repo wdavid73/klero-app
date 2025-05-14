@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:todo_app/api/api.dart';
+import 'package:klero_app/api/api.dart';
 
 /// Interceptor for handling API errors.
 ///
@@ -34,12 +34,8 @@ class ApiErrorsInterceptor extends Interceptor {
 
   /// Handles unauthorized errors (401).
   ///
-  /// TODO: Clear shared preferences.
-  /// TODO: Navigate back to login screen.
   Future<void> _handlerUnauthorizedError(ErrorHandler errorHandler) async {
-    // TODO: Clear shared preferences
-    // TODO: navigate back to login screen if the screen is not the login screen
-    // TODO: Add return no finish the request
+    throw UnimplementedError();
   }
 
   /// Converts a status code into a specific `DioException`.

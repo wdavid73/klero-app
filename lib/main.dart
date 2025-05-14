@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/app/app.dart';
-import 'package:todo_app/config/config.dart';
+import 'package:klero_app/app/app.dart';
+import 'package:klero_app/config/config.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,10 +1,13 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+// import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Environment {
-  static initEnvironment() async {
+  /*static initEnvironment() async {
     await dotenv.load(fileName: ".env");
-  }
+  }*/
 
+  /*
   static String apiUrl = dotenv.env['API_URL'] ?? '';
+  */
+  static String apiUrl = "";
   static String appName = "ToDo App";
 }

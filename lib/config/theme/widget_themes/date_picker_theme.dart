@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/config/theme/theme.dart';
+import 'package:klero_app/config/theme/theme.dart';
+
 import 'text_theme.dart';
 
 final baseDatePickerTheme = DatePickerThemeData(

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:todo_app/ui/shared/service/service.dart';
+import 'package:klero_app/ui/shared/service/service.dart';
 
 /// Interceptor for adding and managing API tokens.
 ///
@@ -59,9 +59,8 @@ class ApiTokenInterceptor extends Interceptor {
 
   /// Handles an expired token.
   ///
-  /// TODO: Add logic to handle an expired token.
   Future<void> _handleExpiredToken() async {
-    // TODO: Add logic to handle an expired token
+    throw UnimplementedError();
   }
 
   /// Retrieves the token from the key-value storage.

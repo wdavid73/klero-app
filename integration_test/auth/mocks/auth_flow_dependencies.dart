@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:todo_app/domain/usecases/usecases.dart';
-import 'package:todo_app/ui/blocs/blocs.dart';
-import 'package:todo_app/ui/cubits/cubits.dart';
-import 'package:todo_app/ui/shared/service/service.dart';
 import 'package:go_router/go_router.dart';
+import 'package:klero_app/domain/usecases/usecases.dart';
+import 'package:klero_app/ui/blocs/blocs.dart';
+import 'package:klero_app/ui/cubits/cubits.dart';
+import 'package:klero_app/ui/shared/service/service.dart';
 import 'package:mocktail/mocktail.dart';
 
 /// Mocks for testing

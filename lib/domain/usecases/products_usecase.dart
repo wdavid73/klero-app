@@ -1,5 +1,5 @@
-import 'package:todo_app/api/api.dart';
-import 'package:todo_app/domain/repositories/products_repository.dart';
+import 'package:klero_app/api/api.dart';
+import 'package:klero_app/domain/repositories/products_repository.dart';
 
 /// Handles product-related use cases.
 ///

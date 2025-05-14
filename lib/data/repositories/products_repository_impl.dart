@@ -1,6 +1,6 @@
-import 'package:todo_app/api/api.dart';
-import 'package:todo_app/domain/datasources/products_datasource.dart';
-import 'package:todo_app/domain/repositories/products_repository.dart';
+import 'package:klero_app/api/api.dart';
+import 'package:klero_app/domain/datasources/products_datasource.dart';
+import 'package:klero_app/domain/repositories/products_repository.dart';
 
 /// Concrete implementation of [ProductsRepository].
 ///

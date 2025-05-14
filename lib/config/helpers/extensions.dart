@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/config/config.dart';
+import 'package:klero_app/config/config.dart';
 
 /// Provides a convenient way to translate strings using the [BuildContext].
 ///
@@ -18,5 +18,11 @@ extension TranslateExtension on BuildContext {
   String translate(String key) {
     if (key != 'null') return AppLocalizations.of(this).translate(key);
     return '';
+  }
+}
+
+extension GetLocale on BuildContext {
+  String currentLocale() {
+    return AppLocalizations.of(this).locale.toString();
   }
 }

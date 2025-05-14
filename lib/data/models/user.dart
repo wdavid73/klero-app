@@ -1,5 +1,6 @@
-import 'package:todo_app/domain/entities/user.dart';
-import 'package:todo_app/data/data.dart';
+import 'package:klero_app/data/data.dart';
+import 'package:klero_app/domain/entities/user.dart';
+
 import 'json_serializable.dart';
 
 /// A concrete implementation of the [User] entity that can be serialized to JSON.

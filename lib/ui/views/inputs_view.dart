@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:todo_app/config/config.dart';
-import 'package:todo_app/ui/shared/service/service.dart';
-import 'package:todo_app/ui/widgets/widgets.dart';
+import 'package:klero_app/config/config.dart';
+import 'package:klero_app/ui/shared/service/service.dart';
+import 'package:klero_app/ui/widgets/widgets.dart';
 
 class InputsWidget extends StatefulWidget {
   const InputsWidget({super.key});

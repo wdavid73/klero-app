@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/config/config.dart';
-import 'package:todo_app/ui/blocs/blocs.dart';
-import 'package:todo_app/ui/shared/shared.dart';
-import 'package:go_router/go_router.dart';
+import 'package:klero_app/config/config.dart';
+import 'package:klero_app/ui/blocs/blocs.dart';
+import 'package:klero_app/ui/shared/shared.dart';
 
 class DrawerHome extends StatelessWidget {
   const DrawerHome({super.key});
@@ -15,7 +14,14 @@ class DrawerHome extends StatelessWidget {
         padding: EdgeInsets.zero,
         child: Column(
           children: [
-            _DrawerHeader(userName: "Joe doe", userEmail: "joe@doe.com"),
+            _DrawerHeader(
+              userName: context.select(
+                (AuthBloc bloc) => bloc.state.user!.fullName,
+              ),
+              userEmail: context.select(
+                (AuthBloc bloc) => bloc.state.user!.email,
+              ),
+            ),
             Expanded(child: _DrawerBody()),
             AppSpacing.md,
             _LastDrawerIcon(
@@ -39,7 +45,7 @@ class _DrawerBody extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        _DrawerItem(
+        /* _DrawerItem(
           icon: Icons.widgets,
           text: "widgets",
           onTap: () {
@@ -54,7 +60,7 @@ class _DrawerBody extends StatelessWidget {
             context.push(RouteConstants.exampleService);
             Navigator.pop(context);
           },
-        ),
+        ), */
       ],
     );
   }
@@ -83,8 +89,8 @@ class _DrawerHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(userName, style: titleStyle),
-              Text(userEmail, style: emailStyle),
+              Text(userName == '' ? 'No-name' : userName, style: titleStyle),
+              Text(userEmail == '' ? 'No-email' : userEmail, style: emailStyle),
             ],
           ),
           const Spacer(),

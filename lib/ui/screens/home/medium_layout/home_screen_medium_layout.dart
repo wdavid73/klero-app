@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/config/config.dart';
-import 'package:todo_app/ui/shared/shared.dart';
+import 'package:klero_app/config/config.dart';
+import 'package:klero_app/ui/shared/shared.dart';
 
 class HomeScreenMediumLayout extends StatelessWidget {
   const HomeScreenMediumLayout({super.key});

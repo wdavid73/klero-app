@@ -1,12 +1,13 @@
 import 'es_form_validation.dart';
 import 'es_form_texts.dart';
-import 'es_introduction.dart';
+import 'features/es_introduction.dart';
+import 'features/es_task.dart';
 
 Map<String, String> esBase = {
   'name': 'Nombre',
   'email': 'Correo',
   'email_address': 'Correo electrónico',
-  'home': 'Inicio',
+  'home': 'Lista de ToDo',
   // AUTH
   'sign_in_account': 'Acceda a su cuenta',
   'login': 'Iniciar Sesión',
@@ -54,6 +55,7 @@ Map<String, String> esBase = {
   'delete': 'Eliminar',
   'close': 'Cerrar',
   'open': 'Abrir',
+  'edit': 'Editar',
   'register_success': 'Registro satisfactorio',
   'register_error': 'Se ha producido un error durante el registro',
   'not_user': 'Sin usuario',
@@ -79,4 +81,5 @@ Map<String, String> esMap = {
   ...formValidations,
   ...formTexts,
   ...introduction,
+  ...esTask,
 };

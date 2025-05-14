@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/config/config.dart';
+import 'package:klero_app/config/theme/responsive.dart';
 
 class LogoContainer extends StatelessWidget {
   const LogoContainer({super.key});
@@ -8,8 +8,9 @@ class LogoContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(10),
-      child: FlutterLogo(
-        size: context.dp(7),
+      child: Image.asset(
+        "assets/app-icon/logo_app_name.png",
+        height: context.hp(10),
       ),
     );
   }

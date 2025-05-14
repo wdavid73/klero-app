@@ -18,12 +18,8 @@ mixin AuthBlocHandler on Bloc<AuthEvent, AuthState> {
       return;
     }
 
-    AuthResponseModel authResponse = response.data;
+    final authResponse = response.data as AuthResponseModel;
 
-    await (this as AuthBloc).keyValueStorageService.setKeyValue(
-          'token',
-          authResponse.token,
-        );
     emit(state.copyWith(
       authStatus: AuthStatus.authenticated,
       user: authResponse.user,
@@ -35,43 +31,25 @@ mixin AuthBlocHandler on Bloc<AuthEvent, AuthState> {
     CheckAuthStatusEvent event,
     Emitter<AuthState> emit,
   ) async {
-    final String? token =
-        await (this as AuthBloc).keyValueStorageService.getValue('token');
+    emit(state.copyWith(authStatus: AuthStatus.checking));
 
-    if (token == null) {
-      await _clearTokenAndEmitNotAuthenticated(emit);
+    final response = await (this as AuthBloc).useCase.checkAuthStatus('');
+
+    if (response is ResponseFailed) {
+      emit(state.copyWith(
+        authStatus: AuthStatus.notAuthenticated,
+        user: null,
+        errorMessage:
+            response.error?.message.toString() ?? 'Error checking auth status',
+      ));
       return;
     }
 
-    try {
-      final response = await (this as AuthBloc).useCase.checkAuthStatus(token);
-      if (response is ResponseFailed) {
-        await _clearTokenAndEmitNotAuthenticated(emit);
-        return;
-      }
-
-      // * this is part is particular of api service used
-      final authResponse = response.data as AuthResponseModel;
-      await (this as AuthBloc)
-          .keyValueStorageService
-          .setKeyValue('token', authResponse.token);
-
-      emit(state.copyWith(
-        authStatus: AuthStatus.authenticated,
-        user: authResponse.user,
-        errorMessage: '',
-      ));
-    } catch (e) {
-      await _clearTokenAndEmitNotAuthenticated(emit);
-    }
-  }
-
-  Future<void> handlerLogout(LogoutEvent event, Emitter<AuthState> emit) async {
-    await (this as AuthBloc).keyValueStorageService.removeKey('token');
+    final authResponse = response.data as AuthResponseModel;
     emit(state.copyWith(
-      authStatus: AuthStatus.notAuthenticated,
+      authStatus: AuthStatus.authenticated,
+      user: authResponse.user,
       errorMessage: '',
-      user: null,
     ));
   }
 
@@ -93,12 +71,7 @@ mixin AuthBlocHandler on Bloc<AuthEvent, AuthState> {
       ));
       return;
     }
-
-    AuthResponseModel authResponse = response.data;
-
-    await (this as AuthBloc)
-        .keyValueStorageService
-        .setKeyValue("token", authResponse.token);
+    final authResponse = response.data as AuthResponseModel;
 
     emit(state.copyWith(
       isCreating: false,
@@ -106,9 +79,19 @@ mixin AuthBlocHandler on Bloc<AuthEvent, AuthState> {
       user: authResponse.user,
       errorMessage: '',
     ));
+    return;
   }
 
-  Future<void> _clearTokenAndEmitNotAuthenticated(
+  Future<void> handlerLogout(LogoutEvent event, Emitter<AuthState> emit) async {
+    await (this as AuthBloc).useCase.logout();
+    emit(state.copyWith(
+      authStatus: AuthStatus.notAuthenticated,
+      errorMessage: '',
+      user: null,
+    ));
+  }
+
+  /* Future<void> _clearTokenAndEmitNotAuthenticated(
       Emitter<AuthState> emit) async {
     await (this as AuthBloc).keyValueStorageService.removeKey('token');
     emit(
@@ -117,5 +100,5 @@ mixin AuthBlocHandler on Bloc<AuthEvent, AuthState> {
           errorMessage: '',
           user: null),
     );
-  }
+  } */
 }
