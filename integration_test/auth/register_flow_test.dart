@@ -24,6 +24,8 @@ void main() {
 
   // Declare mock objects for dependencies.
   late MockAuthBloc mockAuthBloc;
+  late MockAppBloc mockAppCubit;
+
   late MockRegisterFormCubit mockRegisterFormCubit;
   late MockSignInFormCubit mockSignInFormCubit;
   late MockKeyValueStorageService mockStorage;
@@ -45,6 +47,8 @@ void main() {
   setUp(() {
     // Initialize mock objects.
     mockAuthBloc = MockAuthBloc();
+    mockAppCubit = MockAppBloc();
+
     mockRegisterFormCubit = MockRegisterFormCubit();
     mockSignInFormCubit = MockSignInFormCubit();
     mockAuthUse = MockAuthUse();
@@ -90,7 +94,7 @@ void main() {
 
     /// Auth flow set up router
     // Create the app router with the mock AuthBloc.
-    appRouter = createAppRouter(mockAuthBloc);
+    appRouter = createAppRouter(mockAuthBloc, mockAppCubit);
   });
 
   // Tear down is executed after each test.

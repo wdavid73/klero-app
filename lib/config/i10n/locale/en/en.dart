@@ -1,5 +1,5 @@
-import 'en_form_validation.dart';
 import 'en_form_texts.dart';
+import 'en_form_validation.dart';
 import 'features/en_introduction.dart';
 import 'features/en_task.dart';
 
@@ -73,6 +73,8 @@ Map<String, String> enBase = {
   'cancel': 'The request was manually cancelled by the user.',
   'not_internet': 'No internet connection detected, please try again.',
   'error_get_image': 'Error getting image.',
+  'maintenance_app': "App en Mantenimiento",
+  'new_version_available': "New version available",
 };
 
 Map<String, String> enMap = {

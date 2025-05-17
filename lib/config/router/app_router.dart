@@ -19,8 +19,8 @@ import 'routes_generator.dart';
 ///
 /// Returns:
 ///   - A configured [GoRouter] instance ready to be used in the application.
-GoRouter createAppRouter(AuthBloc authBloc) {
-  final goRouterNotifier = GoRouterNotifier(authBloc);
+GoRouter createAppRouter(AuthBloc authBloc, AppVersionBloc appVersionBloc) {
+  final goRouterNotifier = GoRouterNotifier(authBloc, appVersionBloc);
 
   return GoRouter(
     initialLocation: RouteConstants.splash,

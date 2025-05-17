@@ -1,14 +1,30 @@
-import 'es_form_validation.dart';
 import 'es_form_texts.dart';
+import 'es_form_validation.dart';
 import 'features/es_introduction.dart';
 import 'features/es_task.dart';
 
 Map<String, String> esBase = {
+  // GENERAL
   'name': 'Nombre',
   'email': 'Correo',
-  'email_address': 'Correo electrónico',
   'home': 'Lista de ToDo',
-  // AUTH
+  'general': 'General',
+  'error': '¡Error!',
+  'loading': 'Cargando...',
+  'not_found_item': '¡No se han encontrado elementos!',
+  'save': 'Guardar',
+  'update': 'Actualizar',
+  'delete': 'Eliminar',
+  'close': 'Cerrar',
+  'open': 'Abrir',
+  'edit': 'Editar',
+  'not_user': 'Sin usuario',
+  'end_list': 'Has llegado al final de la lista.',
+  'maintenance_app': "App en Mantenimiento",
+  'error_app':
+      "No se pudo comprobar si hay una nueva versión disponible. Asegúrate de tener conexión a internet e inténtalo de nuevo.",
+  'new_version_available': "Nueva version disponible",
+  // AUTH SCREEN
   'sign_in_account': 'Acceda a su cuenta',
   'login': 'Iniciar Sesión',
   'sign_up': 'Regístrate',
@@ -27,16 +43,22 @@ Map<String, String> esBase = {
   "password_update": "Contraseña actualizada correctamente",
   'sign_in_with_google': 'Iniciar sesión con Google',
   'sign_in_with_apple': 'Iniciar sesión con ID de Apple',
+
+  // INPUT TEXT
+  'email_address': 'Correo electrónico',
+
+  // GENERAL MESSAGE
   "accept__btn": "Aceptar",
   "cancel__btn": "Cancelar",
-  // FOUND
   'its_empty': '¡Uy! Está vacío',
   'not_found_title': 'No encontrado',
   'not_found_info': 'No pudimos encontrar lo que buscabas',
+  'register_success': 'Registro satisfactorio',
+  'register_error': 'Se ha producido un error durante el registro',
   // DRAWER
   'profile': 'Perfil',
   'settings': 'Configuración',
-  // SETTING PAGE
+  // SETTINGS SCREEN
   'report_bug': 'Reportar un error',
   'send_feedback': 'Enviar feedback',
   'account': 'Cuenta',
@@ -44,21 +66,7 @@ Map<String, String> esBase = {
   'feedback': 'Feedback',
   'theme': 'Tema',
   'dark_theme': 'Tema oscuro',
-  'general': 'General',
-
-  /// GENERAL
-  'error': '¡Error!',
-  'loading': 'Cargando...',
-  'not_found_item': '¡No se han encontrado elementos!',
-  'save': 'Guardar',
-  'update': 'Actualizar',
-  'delete': 'Eliminar',
-  'close': 'Cerrar',
-  'open': 'Abrir',
-  'edit': 'Editar',
-  'register_success': 'Registro satisfactorio',
-  'register_error': 'Se ha producido un error durante el registro',
-  'not_user': 'Sin usuario',
+  // ERROR CONNECTION
   'connection_time_out':
       'La solicitud de conexión tardó mucho tiempo y fue abortada.',
   'send_time_out':
@@ -71,9 +79,9 @@ Map<String, String> esBase = {
   'unknown': 'Se ha producido un error desconocido al procesar la solicitud.',
   'cancel': 'La solicitud ha sido cancelada manualmente por el usuario.',
   'not_internet': 'No se ha detectado conexión a Internet, inténtelo de nuevo.',
+  // ERROR IMAGE
   'image_not_found': 'Imagen no encontrada',
   'error_get_image': 'Error obteniendo la imagen.',
-  'end_list': 'Has llegado al final de la lista.'
 };
 
 Map<String, String> esMap = {

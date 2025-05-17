@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:klero_app/ui/screens/screens.dart';
+import 'package:klero_app/ui/screens/version_check/error_screen.dart';
 
 import 'routes_constants.dart';
 import 'routes_transitions.dart';
@@ -74,6 +75,24 @@ class AppRoutes {
           transitionType: TransitionType.slideRight,
         ),
       ),
+
+      GoRoute(
+        path: RouteConstants.checkingVersion,
+        name: "checking_version_app",
+        builder: (context, state) => const SplashScreen(),
+      ),
+
+      GoRoute(
+        path: RouteConstants.maintenanceApp,
+        name: "maintenance_app",
+        builder: (context, state) => MaintenanceScreen(),
+      ),
+
+      GoRoute(
+        path: RouteConstants.errorCheckingVersion,
+        name: "error_checking_version",
+        builder: (context, state) => ErrorScreen(),
+      )
     ];
   }
 }

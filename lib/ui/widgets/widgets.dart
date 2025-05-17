@@ -13,3 +13,4 @@ export 'custom_switch.dart';
 export 'custom_text_form_field.dart';
 export 'shared/logo_container.dart';
 export 'svg_picture_custom.dart';
+export 'version_notification.dart';

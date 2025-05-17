@@ -24,24 +24,30 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _AppScope(
-      child: Builder(
-        builder: (context) {
-          final authBloc = context.read<AuthBloc>();
-
-          // Initialize the router if it's null
-          _router ??= createAppRouter(authBloc);
-
-          return MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            routerConfig: _router,
-            title: Environment.appName,
-            theme: AppTheme.getTheme(context),
-            darkTheme: AppTheme.getDarkTheme(context),
-            themeMode: _resolveThemeMode(context),
-            localizationsDelegates: LocaleConfig.localizationDelegate,
-            supportedLocales: LocaleConfig.supportedLocales,
-          );
+      child: BlocProvider(
+        create: (context) {
+          return AppVersionBloc()..checkVersion();
         },
+        child: Builder(
+          builder: (context) {
+            final authBloc = context.read<AuthBloc>();
+            final appBloc = context.read<AppVersionBloc>();
+
+            // Initialize the router if it's null
+            _router ??= createAppRouter(authBloc, appBloc);
+
+            return MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              routerConfig: _router,
+              title: Environment.appName,
+              theme: AppTheme.getTheme(context),
+              darkTheme: AppTheme.getDarkTheme(context),
+              themeMode: _resolveThemeMode(context),
+              localizationsDelegates: LocaleConfig.localizationDelegate,
+              supportedLocales: LocaleConfig.supportedLocales,
+            );
+          },
+        ),
       ),
     );
   }

@@ -22,6 +22,8 @@ class MockKeyValueStorageService extends Mock
 /// Mock Bloc for testing
 class MockAuthBloc extends Mock implements AuthBloc {}
 
+class MockAppBloc extends Mock implements AppVersionBloc {}
+
 class FakeAuthState extends Fake implements AuthState {}
 
 class FakeAuthEvent extends Fake implements AuthEvent {}

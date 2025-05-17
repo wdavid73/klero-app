@@ -13,11 +13,17 @@ class GoRouterNotifier extends ChangeNotifier {
   /// The [AuthBloc] instance used to listen for changes in the authentication state.
   final AuthBloc authBloc;
 
+  final AppVersionBloc appBloc;
+
   /// A subscription to the [AuthBloc]'s stream of authentication states.
   late final StreamSubscription _subscription;
 
+  late final StreamSubscription _streamSubscription;
+
   /// The current authentication status.
   AuthStatus _authStatus = AuthStatus.checking;
+
+  VersionStatus _versionStatus = VersionStatus.loading;
 
   /// Creates a [GoRouterNotifier] instance.
   ///
@@ -28,8 +34,16 @@ class GoRouterNotifier extends ChangeNotifier {
   ///
   /// Parameters:
   ///   - [authBloc]: The [AuthBloc] instance to listen to.
-  GoRouterNotifier(this.authBloc) {
+  GoRouterNotifier(this.authBloc, this.appBloc) {
     _authStatus = authBloc.state.authStatus;
+    _versionStatus = appBloc.state.versionStatus;
+
+    _streamSubscription = appBloc.stream.listen((state) {
+      if (state.versionStatus != _versionStatus) {
+        _versionStatus = state.versionStatus;
+        notifyListeners();
+      }
+    });
 
     _subscription = authBloc.stream.listen((state) {
       if (state.authStatus != _authStatus) {
@@ -44,10 +58,12 @@ class GoRouterNotifier extends ChangeNotifier {
   /// Returns:
   ///   - The current [AuthStatus].
   AuthStatus get authStatus => _authStatus;
+  VersionStatus get versionStatus => _versionStatus;
 
   @override
   void dispose() {
     _subscription.cancel();
+    _streamSubscription.cancel();
     super.dispose();
   }
 }

@@ -35,6 +35,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           _FilterCategories(),
           AppSpacing.sm,
+          VersionNotification(),
           _ListBody(),
         ],
       ),

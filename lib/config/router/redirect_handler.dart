@@ -22,6 +22,37 @@ Map<AuthStatus, RedirectHandler> redirectHandlers = {
       _handleAuthenticatedRedirect(currentPath),
 };
 
+Map<VersionStatus, RedirectHandler> redirectVersionHandlers = {
+  VersionStatus.loading: (currentPath) {
+    print("entro aqui - Loading");
+    return _handlerVersionCheckingRedirect(currentPath);
+  },
+  VersionStatus.error: (currentPath) {
+    print("entro aqui - error");
+    return _handlerMaintenanceAppRedirect(currentPath);
+  },
+  VersionStatus.maintenance: (currentPath) {
+    print("entro aqui - maintenance");
+    return _handlerMaintenanceAppRedirect(currentPath);
+  },
+  VersionStatus.unknown: (currentPath) {
+    print("entro aqui - unknown");
+    return _handlerMaintenanceAppRedirect(currentPath);
+  },
+  VersionStatus.forceUpdate: (currentPath) {
+    print("entro aqui - forceUpdate");
+    return _handlerReadyAppRedirect(currentPath);
+  },
+  VersionStatus.outdated: (currentPath) {
+    print("entro aqui - ready");
+    return _handlerReadyAppRedirect(currentPath);
+  },
+  VersionStatus.ready: (currentPath) {
+    print("entro aqui - ready");
+    return _handlerReadyAppRedirect(currentPath);
+  },
+};
+
 /// Handles redirection logic when the authentication status is [AuthStatus.checking].
 ///
 /// If the [currentPath] is the splash screen, it returns the splash screen path.
@@ -73,6 +104,30 @@ String? _handleAuthenticatedRedirect(String currentPath) {
       : null;
 }
 
+String? _handlerVersionCheckingRedirect(String currentPath) {
+  return currentPath == RouteConstants.checkingVersion
+      ? RouteConstants.checkingVersion
+      : null;
+}
+
+String? _handlerMaintenanceAppRedirect(String currentPath) {
+  if (currentPath == RouteConstants.maintenanceApp ||
+      currentPath == RouteConstants.errorCheckingVersion) {
+    return null;
+  }
+  return RouteConstants.maintenanceApp;
+}
+
+String? _handlerReadyAppRedirect(String currentPath) {
+  return [
+    RouteConstants.maintenanceApp,
+    RouteConstants.errorCheckingVersion,
+    RouteConstants.checkingVersion,
+  ].contains(currentPath)
+      ? RouteConstants.home
+      : null;
+}
+
 /// Determines the appropriate redirection path based on the authentication status.
 ///
 /// This function uses the [redirectHandlers] map to select the correct redirection
@@ -92,9 +147,29 @@ String? appRedirect({
 }) {
   final currentPath = state.uri.path;
   final authStatus = goRouterNotifier.authStatus;
+  final versionStatus = goRouterNotifier.versionStatus;
+
+  if (versionStatus == VersionStatus.loading &&
+      authStatus == AuthStatus.checking) {
+    return RouteConstants.checkingVersion;
+  }
+
+  if (versionStatus == VersionStatus.maintenance &&
+      authStatus != AuthStatus.checking) {
+    return RouteConstants.maintenanceApp;
+  }
 
   if (isOnboardingCompleted) {
-    final handler = redirectHandlers[authStatus];
+    final handlerAuth = redirectHandlers[authStatus];
+    final handlerChecking = redirectVersionHandlers[versionStatus];
+
+    if (authStatus == AuthStatus.authenticated &&
+        versionStatus != VersionStatus.loading) {
+      final handler = handlerChecking;
+      return handler?.call(currentPath);
+    }
+
+    final handler = handlerAuth;
     return handler?.call(currentPath);
     /* return RouteConstants.home; */
   }

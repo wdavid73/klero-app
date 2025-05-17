@@ -17,6 +17,7 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   late MockAuthBloc mockAuthBloc;
+  late MockAppBloc mockAppCubit;
   late MockSignInFormCubit mockSignInFormCubit;
   late MockKeyValueStorageService mockStorage;
   late GoRouter appRouter;
@@ -31,6 +32,7 @@ void main() {
 
   setUp(() {
     mockAuthBloc = MockAuthBloc();
+    mockAppCubit = MockAppBloc();
     mockSignInFormCubit = MockSignInFormCubit();
     mockStorage = MockKeyValueStorageService();
 
@@ -58,7 +60,7 @@ void main() {
     when(() => mockSignInFormCubit.close()).thenAnswer((_) async {});
 
     // Create the app router with the mock AuthBloc.
-    appRouter = createAppRouter(mockAuthBloc);
+    appRouter = createAppRouter(mockAuthBloc, mockAppCubit);
   });
 
   tearDown(() {

@@ -21,6 +21,10 @@ class RouteConstants {
   /// The path for the create task screen
   static const String createTaskScreen = '/task';
 
+  static const String checkingVersion = '/checking_version';
+  static const String maintenanceApp = '/maintenance_app';
+  static const String errorCheckingVersion = '/error_checking_version';
+
   // ----------- EXAMPLES ----------- //
   /// The path for the example service screen.
   static const String exampleService = '/example_service';
