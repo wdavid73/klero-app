@@ -12,18 +12,22 @@ enum VersionStatus {
 
 class AppVersionState extends Equatable {
   final VersionStatus versionStatus;
+  final Map<TargetPlatform, String?> downloadUrls;
   const AppVersionState({
     this.versionStatus = VersionStatus.loading,
+    this.downloadUrls = const {},
   });
 
   @override
-  List<Object> get props => [versionStatus];
+  List<Object> get props => [versionStatus, downloadUrls];
 
   AppVersionState copyWith({
     VersionStatus? versionStatus,
+    Map<TargetPlatform, String?>? downloadUrls,
   }) {
     return AppVersionState(
       versionStatus: versionStatus ?? this.versionStatus,
+      downloadUrls: downloadUrls ?? this.downloadUrls,
     );
   }
 }

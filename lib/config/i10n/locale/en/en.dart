@@ -75,6 +75,9 @@ Map<String, String> enBase = {
   'error_get_image': 'Error getting image.',
   'maintenance_app': "App en Mantenimiento",
   'new_version_available': "New version available",
+  'update_now': "Update now!",
+  'update_message':
+      "Update available! Tap to download the latest version and enjoy the best experience.",
 };
 
 Map<String, String> enMap = {

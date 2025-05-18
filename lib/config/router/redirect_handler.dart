@@ -123,6 +123,9 @@ String? _handlerReadyAppRedirect(String currentPath) {
     RouteConstants.maintenanceApp,
     RouteConstants.errorCheckingVersion,
     RouteConstants.checkingVersion,
+    RouteConstants.loginScreen,
+    RouteConstants.registerScreen,
+    RouteConstants.splash
   ].contains(currentPath)
       ? RouteConstants.home
       : null;

@@ -14,20 +14,30 @@ import './widgets/task_item.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+  void _showForceUpdateDialog(BuildContext context) {
+    final appVersionBloc = context.read<AppVersionBloc>();
+    if (appVersionBloc.state.versionStatus == VersionStatus.forceUpdate) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return CustomForceUpdateVersion(
+            downloadUrls: appVersionBloc.state.downloadUrls,
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration.zero, () => _showForceUpdateDialog(context));
     return AdaptiveScaffold(
       appBar: _appBarHome(context),
       drawer: DrawerHome(),
       floatingActionButton: FloatingActionButton(
-        /* onPressed: () => context.push("/task/new"), */
-        onPressed: () {
-          context.read<TaskBloc>().createMultiple();
-        },
-        child: Icon(
-          Icons.add,
-          size: context.dp(2.6),
-        ),
+        onPressed: () => context.read<TaskBloc>().createMultiple(),
+        child: Icon(Icons.add, size: context.dp(2.6)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,9 +54,7 @@ class HomeScreen extends StatelessWidget {
 
   PreferredSizeWidget? _appBarHome(BuildContext context) {
     return AppBar(
-      title: Text(
-        context.translate('home'),
-      ),
+      title: Text(context.translate('home')),
       actions: [
         IconButton(
           onPressed: () => context.push('/settings'),

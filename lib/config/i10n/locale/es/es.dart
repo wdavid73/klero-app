@@ -24,6 +24,9 @@ Map<String, String> esBase = {
   'error_app':
       "No se pudo comprobar si hay una nueva versión disponible. Asegúrate de tener conexión a internet e inténtalo de nuevo.",
   'new_version_available': "Nueva version disponible",
+  'update_now': "¡Actualiza ahora!",
+  'update_message':
+      "¡Actualización disponible! Toca para descargar la última versión y disfrutar de la mejor experiencia.",
   // AUTH SCREEN
   'sign_in_account': 'Acceda a su cuenta',
   'login': 'Iniciar Sesión',
