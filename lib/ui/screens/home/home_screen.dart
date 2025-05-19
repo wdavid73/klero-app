@@ -11,8 +11,24 @@ import 'package:klero_app/ui/widgets/widgets.dart';
 import './widgets/filter_tag.dart';
 import './widgets/task_item.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _init();
+  }
+
+  void _init() {
+    final uid = context.read<AuthBloc>().state.user!.id;
+    context.read<TaskBloc>().getTasks(uid: uid);
+  }
 
   void _showForceUpdateDialog(BuildContext context) {
     final appVersionBloc = context.read<AppVersionBloc>();
@@ -128,23 +144,19 @@ class _ListBody extends StatelessWidget {
     final taskBloc = context.read<TaskBloc>();
     final taskBlocState = context.watch<TaskBloc>().state;
 
-    List<Task> tasks = taskBlocState.filteredTask.isNotEmpty
-        ? taskBlocState.filteredTask
-        : taskBlocState.tasks;
-
     if (taskBlocState.isLoading) {
       return Expanded(
         child: ShimmerList(),
       );
     }
 
-    if (tasks.isNotEmpty) {
+    if (taskBlocState.tasks.isNotEmpty) {
       return Expanded(
         child: ListView.builder(
-          itemCount: tasks.length,
+          itemCount: taskBlocState.tasks.length,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           itemBuilder: (context, index) {
-            Task task = tasks[index];
+            Task task = taskBlocState.tasks[index];
             return TaskItem(
               title: task.title,
               description: task.description,
@@ -174,7 +186,8 @@ class _ListBody extends StatelessWidget {
           Text(
             context.translate("its_empty"),
             style: context.textTheme.headlineMedium,
-          )
+          ),
+          Text("UID: ${context.read<AuthBloc>().state.user!.id}"),
         ],
       ),
     );

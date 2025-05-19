@@ -10,7 +10,6 @@ enum TaskStatus {
 
 class TaskState extends Equatable {
   final List<Task> tasks;
-  final List<Task> filteredTask;
   final TaskStatus status;
   final String? error;
   final bool creatingTask;
@@ -19,7 +18,6 @@ class TaskState extends Equatable {
 
   const TaskState({
     this.tasks = const <Task>[],
-    this.filteredTask = const <Task>[],
     this.status = TaskStatus.none,
     this.error,
     this.creatingTask = false,
@@ -30,7 +28,6 @@ class TaskState extends Equatable {
   @override
   List<Object> get props => [
         tasks,
-        filteredTask,
         status,
         creatingTask,
         isLoading,
@@ -39,7 +36,6 @@ class TaskState extends Equatable {
 
   TaskState copyWith({
     List<Task>? tasks,
-    List<Task>? filteredTask,
     TaskStatus? status,
     String? error,
     bool? creatingTask,
@@ -48,7 +44,6 @@ class TaskState extends Equatable {
   }) =>
       TaskState(
         tasks: tasks ?? this.tasks,
-        filteredTask: filteredTask ?? this.filteredTask,
         status: status ?? this.status,
         error: error ?? this.error,
         creatingTask: creatingTask ?? this.creatingTask,

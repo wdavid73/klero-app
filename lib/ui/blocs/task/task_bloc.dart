@@ -2,13 +2,41 @@ import 'dart:math';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:klero_app/api/response.dart';
 import 'package:klero_app/domain/entities/task.dart';
+import 'package:klero_app/domain/usecases/tasks_usecase.dart';
 
 part 'task_event.dart';
 part 'task_state.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
-  TaskBloc() : super(TaskState()) {
+  final TasksUsecase useCase;
+  TaskBloc(this.useCase) : super(TaskState()) {
+    on<GetTaskEvent>((event, emit) async {
+      emit(state.copyWith(
+        isLoading: true,
+        status: TaskStatus.none,
+      ));
+      final response = await useCase.getTasks(type: event.type, uid: event.uid);
+
+      if (response is ResponseFailed) {
+        emit(state.copyWith(
+          isLoading: false,
+          tasks: [],
+          error: response.error!.message.toString(),
+          status: TaskStatus.error,
+        ));
+      }
+
+      List<Task> tasks = response.data as List<Task>;
+
+      emit(state.copyWith(
+        isLoading: false,
+        tasks: tasks,
+        error: '',
+      ));
+    });
+
     on<CreateOrUpdateTaskEvent>((event, emit) {
       emit(state.copyWith(status: TaskStatus.none, creatingTask: true));
       try {
@@ -98,11 +126,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       emit(state.copyWith(
         isLoading: false,
         filter: state.filter == filter ? '' : filter,
-        filteredTask: state.filter != filter
-            ? state.tasks.where((e) => e.type == event.filter).toList()
-            : [],
       ));
     });
+  }
+
+  void getTasks({String type = '', required String uid}) {
+    add(GetTaskEvent(type: type, uid: uid));
   }
 
   void addTask(Map<String, dynamic> task) {

@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 /* import 'package:klero_app/api/api.dart'; */
 import 'package:klero_app/data/data.dart';
-import 'package:klero_app/data/datasources/firebase_auth_datasource.dart';
+import 'package:klero_app/data/datasources/datasources.dart';
+import 'package:klero_app/data/repositories/tasks_repository_impl.dart';
 import 'package:klero_app/domain/repositories/repositories.dart';
 import 'package:klero_app/domain/usecases/usecases.dart';
 import 'package:klero_app/ui/blocs/blocs.dart';
@@ -35,6 +37,18 @@ class AppInjection {
       RepositoryProvider<AuthUseCase>(
         create: (context) => AuthUseCase(
           context.read<AuthRepository>(),
+        ),
+      ),
+
+      RepositoryProvider<TasksRepository>(
+        create: (_) => TasksRepositoryImpl(
+          FirestoreTasksDatasource(FirebaseFirestore.instance),
+        ),
+      ),
+
+      RepositoryProvider<TasksUsecase>(
+        create: (context) => TasksUsecase(
+          context.read<TasksRepository>(),
         ),
       ),
     ];
@@ -78,7 +92,9 @@ class AppInjection {
 
       BlocProvider<TaskBloc>(
         // Injects required dependencies automatically.
-        create: (context) => TaskBloc(),
+        create: (context) => TaskBloc(
+          context.read<TasksUsecase>(),
+        ),
         lazy: false, // Lazy initialization of the bloc.
       ),
 

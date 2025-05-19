@@ -2,6 +2,12 @@ part of 'task_bloc.dart';
 
 abstract class TaskEvent {}
 
+class GetTaskEvent extends TaskEvent {
+  final String type;
+  final String uid;
+  GetTaskEvent({required this.uid, this.type = ''});
+}
+
 class CreateOrUpdateTaskEvent extends TaskEvent {
   Map<String, dynamic> task;
   CreateOrUpdateTaskEvent({required this.task});
