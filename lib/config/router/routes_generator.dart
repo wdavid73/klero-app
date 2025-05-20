@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:klero_app/config/config.dart';
 import 'package:klero_app/ui/screens/screens.dart';
 import 'package:klero_app/ui/screens/version_check/error_screen.dart';
 
-import 'routes_constants.dart';
 import 'routes_transitions.dart';
 
 /// A utility class that defines the application's route paths and generates the
@@ -27,36 +27,6 @@ class AppRoutes {
         path: RouteConstants.splash,
         name: "splash",
         builder: (context, state) => const CheckAuthStatusScreen(),
-      ),
-
-      /// HOME ROUTE
-      GoRoute(
-        path: RouteConstants.home,
-        name: "home",
-        builder: (context, state) => const HomeScreen(),
-      ),
-
-      /// SETTINGS ROUTE
-      GoRoute(
-        path: RouteConstants.settingsScreen,
-        name: "settings",
-        /*builder: (context, state) => const SettingsScreen(),*/
-        pageBuilder: (_, __) => _transitionPage(
-          child: const SettingsScreen(),
-          transitionType: TransitionType.slideRight,
-        ),
-      ),
-
-      /// CREATE TASK ROUTE
-      GoRoute(
-        path: "${RouteConstants.createTaskScreen}/:id",
-        name: "task",
-        pageBuilder: (context, state) => _transitionPage(
-          child: TaskScreen(
-            taskId: state.pathParameters['id'] ?? 'no-id',
-          ),
-          transitionType: TransitionType.slideRight,
-        ),
       ),
 
       /// LOGIN ROUTE
@@ -92,10 +62,57 @@ class AppRoutes {
         path: RouteConstants.errorCheckingVersion,
         name: "error_checking_version",
         builder: (context, state) => ErrorScreen(),
-      )
+      ),
+
+      /* ShellRoute(
+        builder: _buildShell,
+        routes: [ */
+      /// HOME ROUTE
+      GoRoute(
+        path: RouteConstants.home,
+        name: "home",
+        builder: (context, state) => const HomeScreen(),
+      ),
+
+      /// SETTINGS ROUTE
+      GoRoute(
+        path: RouteConstants.settingsScreen,
+        name: "settings",
+        /*builder: (context, state) => const SettingsScreen(),*/
+        pageBuilder: (_, __) => _transitionPage(
+          child: const SettingsScreen(),
+          transitionType: TransitionType.slideRight,
+        ),
+      ),
+
+      /// CREATE TASK ROUTE
+      GoRoute(
+        path: "${RouteConstants.createTaskScreen}/:id",
+        name: "task",
+        pageBuilder: (context, state) => _transitionPage(
+          child: TaskScreen(
+            taskId: state.pathParameters['id'] ?? 'no-id',
+          ),
+          transitionType: TransitionType.slideRight,
+        ),
+        /*   ),
+        ], */
+      ),
     ];
   }
 }
+
+/* Widget _buildShell(BuildContext context, GoRouterState state, Widget child) {
+  return BlocProvider(
+    lazy: false, // instance of NotificationsBloc,
+    create: (_) => NotificationsBloc(
+      requestLocalNotificationsPermissions:
+          LocalNotifications.requestPermissionLocalNotification,
+      showLocalNotification: LocalNotifications.showLocalNotification,
+    ),
+    child: child,
+  );
+} */
 
 CustomTransitionPage<void> _transitionPage({
   required Widget child,

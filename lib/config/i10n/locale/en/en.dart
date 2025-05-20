@@ -45,6 +45,8 @@ Map<String, String> enBase = {
   'theme': 'Theme',
   'dark_theme': 'Dark Theme',
   'general': 'General',
+  'permission': 'Permission',
+  'notifications': 'Notifications',
   // GENERAL
   'error': 'Error!',
   'loading': 'Loading...',

@@ -69,6 +69,8 @@ Map<String, String> esBase = {
   'feedback': 'Feedback',
   'theme': 'Tema',
   'dark_theme': 'Tema oscuro',
+  'permission': 'Permisos',
+  'notifications': 'Notificaciones',
   // ERROR CONNECTION
   'connection_time_out':
       'La solicitud de conexión tardó mucho tiempo y fue abortada.',

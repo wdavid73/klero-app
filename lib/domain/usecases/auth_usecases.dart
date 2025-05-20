@@ -7,7 +7,7 @@ import '../repositories/auth_repository.dart';
 /// This class provides methods for logging in, checking the authentication
 /// status, and registering a new user. It interacts with an [AuthRepository]
 /// to perform these operations.
-class AuthUseCase {
+class AuthUseCases {
   /// The [AuthRepository] used to perform authentication operations.
   final AuthRepository repository;
 
@@ -15,7 +15,7 @@ class AuthUseCase {
   ///
   /// Parameters:
   ///   - [repository]: The [AuthRepository] used to perform authentication operations.
-  AuthUseCase(this.repository);
+  AuthUseCases(this.repository);
 
   /// Attempts to log in a user with the given [email] and [password].
   ///
