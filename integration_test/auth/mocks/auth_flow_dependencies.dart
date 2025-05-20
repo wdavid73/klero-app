@@ -24,6 +24,10 @@ class MockAuthBloc extends Mock implements AuthBloc {}
 
 class MockAppBloc extends Mock implements AppVersionBloc {}
 
+class MockTaskBloc extends Mock implements TaskBloc {}
+
+class MockThemModeCubit extends Mock implements ThemeModeCubit {}
+
 class FakeAuthState extends Fake implements AuthState {}
 
 class FakeAuthEvent extends Fake implements AuthEvent {}

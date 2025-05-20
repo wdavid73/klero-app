@@ -23,8 +23,10 @@ void main() {
 
   // Declare mock objects for dependencies.
   late MockAuthBloc mockAuthBloc;
-  late MockAppBloc mockAppCubit;
+  late MockAppBloc mockAppBloc;
   late MockSignInFormCubit mockSignInFormCubit;
+  late MockTaskBloc mockTaskBloc;
+  late MockThemModeCubit mockThemModeCubit;
   late MockKeyValueStorageService mockStorage;
   late MockAuthUse mockAuthUse;
   late GoRouter appRouter;
@@ -32,6 +34,9 @@ void main() {
   // Declare stream controllers for state management.
   late StreamController<AuthState> authStateController;
   late StreamController<SignInFormState> signInFormStateController;
+  late StreamController<AppVersionState> appVersionStateController;
+  late StreamController<TaskState> taskStateController;
+  late StreamController<ThemeModeState> themeModeController;
 
   // Set up all is executed once before all tests.
   setUpAll(() {
@@ -44,13 +49,18 @@ void main() {
   setUp(() {
     // Initialize mock objects.
     mockAuthBloc = MockAuthBloc();
-    mockAppCubit = MockAppBloc();
+    mockAppBloc = MockAppBloc();
     mockSignInFormCubit = MockSignInFormCubit();
+    mockTaskBloc = MockTaskBloc();
+    mockThemModeCubit = MockThemModeCubit();
     mockAuthUse = MockAuthUse();
     mockStorage = MockKeyValueStorageService();
     // Initialize stream controllers.
     authStateController = StreamController<AuthState>.broadcast();
     signInFormStateController = StreamController<SignInFormState>.broadcast();
+    appVersionStateController = StreamController<AppVersionState>.broadcast();
+    taskStateController = StreamController<TaskState>.broadcast();
+    themeModeController = StreamController<ThemeModeState>.broadcast();
 
     /// Auth flow set up mock auth bloc
     // Mock initial state of AuthBloc.
@@ -74,9 +84,29 @@ void main() {
     // Mock closing of SignInFormCubit.
     when(() => mockSignInFormCubit.close()).thenAnswer((_) async {});
 
+    when(() => mockAppBloc.state).thenReturn(const AppVersionState());
+    when(() => mockAppBloc.stream).thenAnswer(
+      (_) => appVersionStateController.stream,
+    );
+    when(() => mockAppBloc.close()).thenAnswer((_) async {});
+
+    /// Auth flow set up mock task bloc
+    when(() => mockTaskBloc.state).thenReturn(const TaskState());
+    when(() => mockTaskBloc.stream).thenAnswer(
+      (_) => taskStateController.stream,
+    );
+    when(() => mockTaskBloc.close()).thenAnswer((_) async {});
+
+    /// Auth flow set up mock theme mode cubit
+    when(() => mockThemModeCubit.state).thenReturn(const ThemeModeState());
+    when(() => mockThemModeCubit.stream).thenAnswer(
+      (_) => themeModeController.stream,
+    );
+    when(() => mockThemModeCubit.close()).thenAnswer((_) async {});
+
     /// Auth flow set up router
     // Create the app router with the mock AuthBloc.
-    appRouter = createAppRouter(mockAuthBloc, mockAppCubit);
+    appRouter = createAppRouter(mockAuthBloc, mockAppBloc);
   });
 
   // Tear down is executed after each test.
@@ -85,6 +115,9 @@ void main() {
     authStateController.close();
     mockAuthBloc.close();
     mockSignInFormCubit.close();
+    mockAppBloc.close();
+    mockTaskBloc.close();
+    mockThemModeCubit.close();
   });
 
   // Test case: Initial navigation to login when no token.
@@ -102,6 +135,9 @@ void main() {
         providers: [
           BlocProvider<AuthBloc>.value(value: mockAuthBloc),
           BlocProvider<SignInFormCubit>.value(value: mockSignInFormCubit),
+          BlocProvider<AppVersionBloc>.value(value: mockAppBloc),
+          BlocProvider<TaskBloc>.value(value: mockTaskBloc),
+          BlocProvider<ThemeModeCubit>.value(value: mockThemModeCubit),
         ],
       ));
 
@@ -150,6 +186,9 @@ void main() {
         providers: [
           BlocProvider<AuthBloc>.value(value: mockAuthBloc),
           BlocProvider<SignInFormCubit>.value(value: mockSignInFormCubit),
+          BlocProvider<AppVersionBloc>.value(value: mockAppBloc),
+          BlocProvider<TaskBloc>.value(value: mockTaskBloc),
+          BlocProvider<ThemeModeCubit>.value(value: mockThemModeCubit),
         ],
       ));
 
@@ -288,6 +327,9 @@ void main() {
         providers: [
           BlocProvider<AuthBloc>.value(value: mockAuthBloc),
           BlocProvider<SignInFormCubit>.value(value: mockSignInFormCubit),
+          BlocProvider<AppVersionBloc>.value(value: mockAppBloc),
+          BlocProvider<TaskBloc>.value(value: mockTaskBloc),
+          BlocProvider<ThemeModeCubit>.value(value: mockThemModeCubit),
         ],
       ));
 
