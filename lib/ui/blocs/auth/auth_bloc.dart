@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:klero_app/api/api.dart';
 import 'package:klero_app/data/data.dart';
-import 'package:klero_app/domain/usecases/auth_usecase.dart';
+import 'package:klero_app/domain/usecases/auth_usecases.dart';
 import 'package:klero_app/ui/shared/service/service.dart';
 
 part 'auth_bloc_handler.dart';
@@ -17,7 +17,7 @@ part 'auth_state.dart';
 /// data.
 class AuthBloc extends Bloc<AuthEvent, AuthState> with AuthBlocHandler {
   /// The [AuthUseCase] used to perform authentication operations.
-  final AuthUseCase useCase;
+  final AuthUseCases useCase;
 
   /// The [KeyValueStorageService] used to manage persistent data.
   final KeyValueStorageService keyValueStorageService;

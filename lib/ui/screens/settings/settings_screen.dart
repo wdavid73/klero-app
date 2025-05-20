@@ -9,6 +9,8 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //final notificationBloc = context.read<NotificationsBloc>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(context.translate("settings")),
@@ -46,6 +48,27 @@ class SettingsScreen extends StatelessWidget {
                 icon: Icons.send_rounded,
               ),
               */
+
+              /*
+              const SizedBox(height: 20),
+              Text(
+                context.translate('permission'),
+                style: context.textTheme.titleSmall,
+              ),
+              CustomSwitch(
+                icon: Icon(Icons.notifications),
+                title: context.translate('notifications'),
+                switchValue: context.select(
+                  (NotificationsBloc bloc) =>
+                      bloc.state.status == AuthorizationStatus.authorized,
+                ),
+                onChanged: (_) {
+                  notificationBloc.requestPermission();
+                },
+              ),
+              const Divider(),
+              */
+
               const SizedBox(height: 20),
               Text(
                 context.translate('theme'),

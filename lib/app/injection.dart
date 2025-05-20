@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-/* import 'package:klero_app/api/api.dart'; */
 import 'package:klero_app/data/data.dart';
-import 'package:klero_app/data/datasources/datasources.dart';
-import 'package:klero_app/data/repositories/tasks_repository_impl.dart';
 import 'package:klero_app/domain/repositories/repositories.dart';
 import 'package:klero_app/domain/usecases/usecases.dart';
 import 'package:klero_app/ui/blocs/blocs.dart';
@@ -34,8 +31,8 @@ class AppInjection {
       ),
 
       /// Provides `AuthUseCase`, which contains authentication-related business logic.
-      RepositoryProvider<AuthUseCase>(
-        create: (context) => AuthUseCase(
+      RepositoryProvider<AuthUseCases>(
+        create: (context) => AuthUseCases(
           context.read<AuthRepository>(),
         ),
       ),
@@ -46,8 +43,8 @@ class AppInjection {
         ),
       ),
 
-      RepositoryProvider<TasksUsecase>(
-        create: (context) => TasksUsecase(
+      RepositoryProvider<TasksUsecases>(
+        create: (context) => TasksUsecases(
           context.read<TasksRepository>(),
         ),
       ),
@@ -69,7 +66,7 @@ class AppInjection {
       /// Provides the `AuthBloc`, responsible for handling authentication logic.
       BlocProvider<AuthBloc>(
         create: (context) => AuthBloc(
-          context.read<AuthUseCase>(),
+          context.read<AuthUseCases>(),
           KeyValueStorageServiceImpl(),
         ),
       ),
@@ -93,7 +90,7 @@ class AppInjection {
       BlocProvider<TaskBloc>(
         // Injects required dependencies automatically.
         create: (context) => TaskBloc(
-          context.read<TasksUsecase>(),
+          context.read<TasksUsecases>(),
         ),
         lazy: false, // Lazy initialization of the bloc.
       ),

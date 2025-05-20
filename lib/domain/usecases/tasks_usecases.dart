@@ -1,10 +1,10 @@
 import 'package:klero_app/api/api.dart';
 import 'package:klero_app/domain/repositories/tasks_repository.dart';
 
-class TasksUsecase {
+class TasksUsecases {
   final TasksRepository repository;
 
-  TasksUsecase(this.repository);
+  TasksUsecases(this.repository);
 
   Future<ResponseState> getTasks({String type = '', required String uid}) {
     return repository.getTasks(type: type, uid: uid);

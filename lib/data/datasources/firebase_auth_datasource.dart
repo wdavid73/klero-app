@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:klero_app/api/api.dart';
 import 'package:klero_app/api/response.dart';
 import 'package:klero_app/data/models/auth_response.dart';
-import 'package:klero_app/data/models/user.dart';
+import 'package:klero_app/data/models/user_model.dart';
 import 'package:klero_app/domain/datasources/auth_datasource.dart';
 
 class FirebaseAuthDataSource extends AuthDataSource {

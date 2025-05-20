@@ -4,13 +4,13 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:klero_app/api/response.dart';
 import 'package:klero_app/domain/entities/task.dart';
-import 'package:klero_app/domain/usecases/tasks_usecase.dart';
+import 'package:klero_app/domain/usecases/tasks_usecases.dart';
 
 part 'task_event.dart';
 part 'task_state.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
-  final TasksUsecase useCase;
+  final TasksUsecases useCase;
   TaskBloc(this.useCase) : super(TaskState()) {
     on<GetTaskEvent>((event, emit) async {
       emit(state.copyWith(

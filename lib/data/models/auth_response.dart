@@ -1,4 +1,4 @@
-import 'user.dart';
+import 'user_model.dart';
 
 /// Represents the response model for authentication-related operations.
 ///

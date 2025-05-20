@@ -14,7 +14,7 @@ class MockSignInFormCubit extends Mock implements SignInFormCubit {}
 
 class MockRegisterFormCubit extends Mock implements RegisterFormCubit {}
 
-class MockAuthUse extends Mock implements AuthUseCase {}
+class MockAuthUse extends Mock implements AuthUseCases {}
 
 class MockKeyValueStorageService extends Mock
     implements KeyValueStorageService {}
@@ -23,6 +23,10 @@ class MockKeyValueStorageService extends Mock
 class MockAuthBloc extends Mock implements AuthBloc {}
 
 class MockAppBloc extends Mock implements AppVersionBloc {}
+
+class MockTaskBloc extends Mock implements TaskBloc {}
+
+class MockThemModeCubit extends Mock implements ThemeModeCubit {}
 
 class FakeAuthState extends Fake implements AuthState {}
 

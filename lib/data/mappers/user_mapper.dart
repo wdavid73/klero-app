@@ -1,4 +1,4 @@
-import 'package:klero_app/data/models/user.dart';
+import 'package:klero_app/data/models/user_model.dart';
 
 /// A utility class for mapping between JSON data and [UserModel] objects.
 ///

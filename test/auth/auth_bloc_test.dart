@@ -100,20 +100,24 @@ void main() {
 
     /// Tests the [checkAuthStatus] method when token is found
     blocTest<AuthBloc, AuthState>(
-      'emits [checking, notAuthenticated] when no token is found',
+      'emits [checking, notAuthenticated] when no user is not found',
       build: () {
-        when(() => mockStorageService.getValue<String>("token")).thenAnswer(
-          (_) async => null,
-        );
-
-        when(() => mockStorageService.removeKey("token")).thenAnswer(
-          (_) async => true,
+        when(() => mockAuthUseCase.checkAuthStatus("")).thenAnswer(
+          (_) async => ResponseFailed(DioException(
+            message: "user not found",
+            requestOptions: RequestOptions(path: "firebase"),
+          )),
         );
 
         return authBloc;
       },
       act: (bloc) => bloc.add(CheckAuthStatusEvent()),
       expect: () => [
+        isA<AuthState>().having(
+          (s) => s.authStatus,
+          "authStatus",
+          AuthStatus.checking,
+        ),
         isA<AuthState>().having(
           (s) => s.authStatus,
           "authStatus",
@@ -122,9 +126,9 @@ void main() {
       ],
     );
 
-    /// Tests the [checkAuthStatus] method when token is valid
+    /// Tests the [checkAuthStatus] method when user exist
     blocTest<AuthBloc, AuthState>(
-      "emits [checking, authenticated] when token is valid and user data is loaded",
+      "emits [checking, authenticated] when user exist",
       build: () {
         final someMockUser = UserModel(
           id: '1',
@@ -132,26 +136,22 @@ void main() {
           fullName: 'Joe Doe',
         );
 
-        when(() => mockStorageService.getValue<String>('token'))
-            .thenAnswer((_) async => "valid_token");
-
-        when(() => mockAuthUseCase.checkAuthStatus("valid_token")).thenAnswer(
+        when(() => mockAuthUseCase.checkAuthStatus("")).thenAnswer(
           (_) async => ResponseSuccess(
-            AuthResponseModel(token: 'valid_token', user: someMockUser),
+            AuthResponseModel(token: '', user: someMockUser),
             200,
           ),
         );
-
-        when(() => mockStorageService.setKeyValue('token', 'valid_token'))
-            .thenAnswer((_) async {});
-
-        when(() => mockStorageService.removeKey(any()))
-            .thenAnswer((_) async => true);
 
         return authBloc;
       },
       act: (bloc) => bloc.add(CheckAuthStatusEvent()),
       expect: () => [
+        isA<AuthState>().having(
+          (s) => s.authStatus,
+          "authStatus",
+          AuthStatus.checking,
+        ),
         isA<AuthState>().having(
           (s) => s.authStatus,
           "authStatus",
@@ -160,41 +160,13 @@ void main() {
       ],
     );
 
-    /// Tests the [checkAuthStatus] method when token is invalid
-    blocTest<AuthBloc, AuthState>(
-      "emits [checking, authenticated] when token is not valid",
-      build: () {
-        when(() => mockStorageService.getValue<String>('token'))
-            .thenAnswer((_) async => "mocked_token");
-
-        when(() => mockAuthUseCase.checkAuthStatus("valid_token")).thenAnswer(
-          (_) async => ResponseFailed(DioException(
-            message: "checkAuthStatus failed",
-            requestOptions: RequestOptions(),
-          )),
-        );
-
-        when(() => mockStorageService.removeKey("token"))
-            .thenAnswer((_) async => true);
-
-        return authBloc;
-      },
-      act: (bloc) => bloc.add(CheckAuthStatusEvent()),
-      expect: () => [
-        isA<AuthState>().having(
-          (s) => s.authStatus,
-          "authStatus",
-          AuthStatus.notAuthenticated,
-        )
-      ],
-    );
-
     /// Tests the [logout] method
     blocTest<AuthBloc, AuthState>(
       'emits [notAuthenticated] when logout is called',
       build: () {
-        when(() => mockStorageService.removeKey("token"))
-            .thenAnswer((_) async => true);
+        when(() => mockAuthUseCase.logout()).thenAnswer(
+          (_) async {},
+        );
 
         return authBloc;
       },
