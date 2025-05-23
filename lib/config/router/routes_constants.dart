@@ -22,19 +22,10 @@ class RouteConstants {
   static const String createTaskScreen = '/task';
 
   static const String checkingVersion = '/checking_version';
+
   static const String maintenanceApp = '/maintenance_app';
+
   static const String errorCheckingVersion = '/error_checking_version';
 
-  // ----------- EXAMPLES ----------- //
-  /// The path for the example service screen.
-  static const String exampleService = '/example_service';
-
-  /// The path for the widgets screen.
-  static const String widgetsScreen = '/widgets';
-  static const String textStylesView = '/text_styles_view';
-  static const String inputsView = '/inputs_view';
-  static const String selectableWidgetView = '/selectable_widget_view';
-  static const String drawerView = '/drawer_view';
-  static const String buttonsView = '/buttons_view';
-  static const String bottomSheetView = '/bottom_sheet_view';
+  static const String accountDetails = '/account_details';
 }

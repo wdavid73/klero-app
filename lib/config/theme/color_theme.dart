@@ -21,7 +21,7 @@ class ColorTheme {
 
   // Utils
   static Color error = HexColor.fromHex("#EF5350");
-  static Color divider = HexColor.fromHex("#BDBDBD");
+  static Color divider = HexColor.fromHex("#E0E0E0");
   static Color success = HexColor.fromHex("#4caf50");
   static Color white = HexColor.fromHex("#FFFFFF");
   static Color disable = HexColor.fromHex("#bcbcbc");

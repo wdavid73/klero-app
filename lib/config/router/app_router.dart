@@ -27,23 +27,6 @@ GoRouter createAppRouter(AuthBloc authBloc, AppVersionBloc appVersionBloc) {
     routes: AppRoutes.getAppRoutes(),
     refreshListenable: goRouterNotifier,
     redirect: (context, state) {
-      /* final introductionCubit = BlocProvider.of<IntroductionCubit>(
-        context,
-        listen: false,
-      );
-
-      if (introductionCubit.state.isLoading) {
-        return null;
-      }
-
-      final isOnboardingCompleted = introductionCubit.state.hasSeen;
-      final currentPath = state.uri.path;
-
-      if (!isOnboardingCompleted &&
-          currentPath != RouteConstants.onboardingScreen) {
-        return RouteConstants.onboardingScreen;
-      } */
-
       return appRedirect(
         goRouterNotifier: goRouterNotifier,
         state: state,

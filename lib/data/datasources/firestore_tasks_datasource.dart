@@ -10,6 +10,8 @@ class FirestoreTasksDatasource implements TasksDatasource {
 
   FirestoreTasksDatasource(this._firestore);
 
+  static const String collection = 'tasks';
+
   @override
   Future<ResponseState> getTasks({
     String type = '',
@@ -17,15 +19,17 @@ class FirestoreTasksDatasource implements TasksDatasource {
   }) async {
     try {
       QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
-          .collection("tasks")
-          .where("userUid", isEqualTo: uid)
+          .collection(collection)
+          .where("user_id", isEqualTo: uid)
           .get();
 
       List<Task> tasks = [];
 
       for (QueryDocumentSnapshot<Map<String, dynamic>> doc
           in querySnapshot.docs) {
-        tasks.add(TaskModel.fromJson(doc.data()));
+        Map<String, dynamic> json = doc.data();
+        json["id"] = doc.id;
+        tasks.add(TaskModel.fromJson(json));
       }
       return ResponseSuccess(tasks, 200);
     } catch (e) {
@@ -38,22 +42,104 @@ class FirestoreTasksDatasource implements TasksDatasource {
   }
 
   @override
-  Future<ResponseState> deleteTask(String taskId) {
-    throw UnimplementedError();
+  Future<ResponseState> createTask(Map<String, dynamic> task) async {
+    try {
+      task.remove('id');
+      if (task['type'] == null) task.remove('type');
+
+      DocumentReference docRef =
+          await _firestore.collection(collection).add(task);
+      DocumentSnapshot docSnapshot = await docRef.get();
+      if (docSnapshot.exists && docSnapshot.data() != null) {
+        Map<String, dynamic> taskAdded =
+            docSnapshot.data() as Map<String, dynamic>;
+        taskAdded['id'] = docSnapshot.id;
+        TaskModel newTask = TaskModel.fromJson(taskAdded);
+        return ResponseSuccess(newTask, 201);
+      } else {
+        return ResponseFailed(
+          DioException(
+            requestOptions: RequestOptions(path: "firestore"),
+            error: null,
+            message: "error get task added",
+          ),
+        );
+      }
+    } catch (e) {
+      return ResponseFailed(
+        DioException(
+          requestOptions: RequestOptions(path: "firestore"),
+          error: e,
+          message: e.toString(),
+        ),
+      );
+    }
   }
 
   @override
-  Future<ResponseState> promoteTask(String taskId, String promote) {
-    throw UnimplementedError();
+  Future<ResponseState> deleteTask(String taskId) async {
+    try {
+      await _firestore.collection(collection).doc(taskId).delete();
+      return ResponseSuccess(null, 204);
+    } catch (e) {
+      return ResponseFailed(
+        DioException(
+          requestOptions: RequestOptions(path: "firestore"),
+          error: e,
+          message: e.toString(),
+        ),
+      );
+    }
   }
 
   @override
-  Future<ResponseState> createTask(TaskModel task) {
-    throw UnimplementedError();
+  Future<ResponseState> promoteTask(String taskId, String promote) async {
+    try {
+      await _firestore.collection(collection).doc(taskId).update({
+        "type": promote,
+      });
+      return ResponseSuccess(null, 204);
+    } catch (e) {
+      return ResponseFailed(
+        DioException(
+          requestOptions: RequestOptions(path: "firestore"),
+          error: e,
+          message: e.toString(),
+        ),
+      );
+    }
   }
 
   @override
-  Future<ResponseState> updateTask(TaskModel task) {
-    throw UnimplementedError();
+  Future<ResponseState> updateTask(TaskModel task) async {
+    try {
+      DocumentReference docRef = _firestore.collection(collection).doc(task.id);
+      await docRef.update(task.toJson());
+
+      DocumentSnapshot docSnapshot = await docRef.get();
+      if (docSnapshot.exists && docSnapshot.data() != null) {
+        Map<String, dynamic> taskUpdated =
+            docSnapshot.data() as Map<String, dynamic>;
+        taskUpdated["id"] = docSnapshot.id;
+        TaskModel task = TaskModel.fromJson(taskUpdated);
+        return ResponseSuccess(task, 200);
+      } else {
+        return ResponseFailed(
+          DioException(
+            requestOptions: RequestOptions(path: "firestore"),
+            error: null,
+            message: "error get task updated",
+          ),
+        );
+      }
+    } catch (e) {
+      return ResponseFailed(
+        DioException(
+          requestOptions: RequestOptions(path: "firestore"),
+          error: e,
+          message: e.toString(),
+        ),
+      );
+    }
   }
 }

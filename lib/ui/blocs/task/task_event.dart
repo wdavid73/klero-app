@@ -8,9 +8,9 @@ class GetTaskEvent extends TaskEvent {
   GetTaskEvent({required this.uid, this.type = ''});
 }
 
-class CreateOrUpdateTaskEvent extends TaskEvent {
+class CreateTaskEvent extends TaskEvent {
   Map<String, dynamic> task;
-  CreateOrUpdateTaskEvent({required this.task});
+  CreateTaskEvent({required this.task});
 }
 
 class DeleteTaskEvent extends TaskEvent {
@@ -19,7 +19,7 @@ class DeleteTaskEvent extends TaskEvent {
 }
 
 class EditTaskEvent extends TaskEvent {
-  Task task;
+  Map<String, dynamic> task;
   EditTaskEvent({required this.task});
 }
 

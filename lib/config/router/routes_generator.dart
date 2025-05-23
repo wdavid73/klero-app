@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:klero_app/config/config.dart';
 import 'package:klero_app/ui/screens/screens.dart';
 import 'package:klero_app/ui/screens/version_check/error_screen.dart';
+import 'package:klero_app/ui/views/views.dart';
 
 import 'routes_transitions.dart';
 
@@ -95,9 +96,19 @@ class AppRoutes {
           ),
           transitionType: TransitionType.slideRight,
         ),
-        /*   ),
-        ], */
       ),
+
+      GoRoute(
+        path: RouteConstants.accountDetails,
+        name: "account_details",
+        pageBuilder: (context, state) => _transitionPage(
+          child: AccountDetails(),
+          transitionType: TransitionType.slideRight,
+        ),
+      )
+
+      /*   ),
+        ], */
     ];
   }
 }

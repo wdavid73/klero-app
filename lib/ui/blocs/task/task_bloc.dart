@@ -1,123 +1,22 @@
-import 'dart:math';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:klero_app/api/response.dart';
+import 'package:klero_app/data/data.dart';
 import 'package:klero_app/domain/entities/task.dart';
 import 'package:klero_app/domain/usecases/tasks_usecases.dart';
 
+part 'task_bloc_handler.dart';
 part 'task_event.dart';
 part 'task_state.dart';
 
-class TaskBloc extends Bloc<TaskEvent, TaskState> {
+class TaskBloc extends Bloc<TaskEvent, TaskState> with TaskBlocHandler {
   final TasksUsecases useCase;
   TaskBloc(this.useCase) : super(TaskState()) {
-    on<GetTaskEvent>((event, emit) async {
-      emit(state.copyWith(
-        isLoading: true,
-        status: TaskStatus.none,
-      ));
-      final response = await useCase.getTasks(type: event.type, uid: event.uid);
-
-      if (response is ResponseFailed) {
-        emit(state.copyWith(
-          isLoading: false,
-          tasks: [],
-          error: response.error!.message.toString(),
-          status: TaskStatus.error,
-        ));
-      }
-
-      List<Task> tasks = response.data as List<Task>;
-
-      emit(state.copyWith(
-        isLoading: false,
-        tasks: tasks,
-        error: '',
-      ));
-    });
-
-    on<CreateOrUpdateTaskEvent>((event, emit) {
-      emit(state.copyWith(status: TaskStatus.none, creatingTask: true));
-      try {
-        final isTaskInList = state.tasks.any((e) => e.id == event.task["id"]);
-
-        if (!isTaskInList) {
-          Task task = Task(
-            id: "${state.tasks.length + 1}",
-            title: event.task["title"],
-            description: event.task["description"],
-            date: event.task["date"].toString(),
-          );
-
-          emit(state.copyWith(
-            tasks: [...state.tasks, task],
-            status: TaskStatus.created,
-            creatingTask: false,
-          ));
-          return;
-        }
-
-        Task task = Task(
-          id: event.task["id"].toString(),
-          title: event.task["title"],
-          description: event.task["description"],
-          date: event.task["date"].toString(),
-        );
-        emit(state.copyWith(
-          tasks: state.tasks
-              .map((e) => e.id == event.task["id"] ? task : e)
-              .toList(),
-          status: TaskStatus.updated,
-          creatingTask: false,
-        ));
-        return;
-      } catch (e) {
-        emit(state.copyWith(
-          status: TaskStatus.error,
-          error: e.toString(),
-          creatingTask: false,
-        ));
-      }
-    });
-
-    on<DeleteTaskEvent>((event, emit) {
-      bool exist = state.tasks.any((e) => e.id == event.task.id);
-      if (exist) {
-        emit(state.copyWith(
-          tasks: state.tasks.where((e) => e.id != event.task.id).toList(),
-        ));
-      }
-    });
-
-    on<PromoteTaskEvent>((event, emit) {
-      bool exist = state.tasks.any((e) => e.id == event.task.id);
-      if (exist) {
-        emit(state.copyWith(
-          tasks: state.tasks
-              .map((e) => e.id == event.task.id
-                  ? event.task.copyWith(type: event.promote)
-                  : e)
-              .toList(),
-        ));
-      }
-    });
-
-    on<CreateMultipleTask>((event, emit) {
-      List<Task> taskMultiple = [];
-      Random random = Random();
-      List<String> types = ["to_do", "in_review", "complete"];
-      for (var i = 0; i < 20; i++) {
-        taskMultiple.add(Task(
-          id: "${i + 1}",
-          title: "Task #${i + 1}",
-          description: "Description #${i + 1}",
-          date: DateTime.now().toString(),
-          type: types[random.nextInt(types.length)],
-        ));
-      }
-      emit(state.copyWith(tasks: taskMultiple));
-    });
+    on<GetTaskEvent>(handlerGetTask);
+    on<CreateTaskEvent>(handlerCreateTask);
+    on<EditTaskEvent>(handlerUpdateTask);
+    on<DeleteTaskEvent>(handlerDeleteTask);
+    on<PromoteTaskEvent>(handlerPromoteTask);
 
     on<FilterTasksEvent>((event, emit) async {
       String filter = event.filter;
@@ -135,7 +34,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   void addTask(Map<String, dynamic> task) {
-    add(CreateOrUpdateTaskEvent(task: task));
+    add(CreateTaskEvent(task: task));
   }
 
   void deleteTask(Task task) {
@@ -146,8 +45,8 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     add(PromoteTaskEvent(promote: promote, task: task));
   }
 
-  void createMultiple() {
-    add(CreateMultipleTask());
+  void updateTask(Map<String, dynamic> task) {
+    add(EditTaskEvent(task: task));
   }
 
   void filterTags(String filter) {

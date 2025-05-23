@@ -26,3 +26,9 @@ extension GetLocale on BuildContext {
     return AppLocalizations.of(this).locale.toString();
   }
 }
+
+extension UnFocusScreen on BuildContext {
+  void unfocus() {
+    return FocusScope.of(this).unfocus();
+  }
+}

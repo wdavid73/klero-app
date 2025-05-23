@@ -6,4 +6,3 @@ export 'settings/settings_screen.dart';
 export 'tasks/task_screen.dart';
 export 'version_check/maintenance_screen.dart';
 export 'version_check/splash_screen.dart';
-export 'widgets/widgets_screen.dart';

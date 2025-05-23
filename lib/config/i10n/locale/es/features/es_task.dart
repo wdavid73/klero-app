@@ -4,6 +4,8 @@ Map<String, dynamic> esTask = {
   'in_review': 'En revision',
   'create_task_title': "Crear nueva tarea",
   'create_task': 'Crear Tarea',
+  'edit_task_title': "Editar tarea",
+  'update_task': "Actualizar tarea",
   'task_title_label': "Titulo de la tarea",
   'task_title_hint': "Ingrese un nombre para la tarea",
   'task_description_label': 'Descripción de la tarea',

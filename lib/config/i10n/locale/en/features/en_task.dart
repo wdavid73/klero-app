@@ -4,6 +4,8 @@ Map<String, dynamic> enTask = {
   'in_review': 'In Review',
   'create_task_title': "Create new task",
   'create_task': 'Create Task',
+  'edit_task_title': "Edit task",
+  'update_task': "Update task",
   'task_title_label': "Task title",
   'task_title_hint': "Input a title to the task",
   'task_description_label': 'Task description',

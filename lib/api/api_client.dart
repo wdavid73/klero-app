@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:klero_app/api/api.dart';
-import 'package:klero_app/config/config.dart';
 import 'package:klero_app/ui/shared/service/service.dart';
 
 /// Handles HTTP requests to the API.
@@ -24,7 +23,7 @@ class ApiClient {
   ///
   /// Sets the base URL, timeouts, response type, and default headers.
   static BaseOptions createBaseOptions() => BaseOptions(
-        baseUrl: Environment.apiUrl,
+        baseUrl: "#",
         receiveTimeout: const Duration(seconds: 10),
         connectTimeout: const Duration(seconds: 10),
         responseType: ResponseType.json,

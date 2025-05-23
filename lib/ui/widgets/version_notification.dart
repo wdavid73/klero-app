@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:klero_app/app/dependency_injection.dart';
 import 'package:klero_app/config/config.dart';
 import 'package:klero_app/ui/blocs/blocs.dart';
 import 'package:klero_app/ui/shared/shared.dart';
@@ -9,9 +9,9 @@ class VersionNotification extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final versionBloc = context.watch<AppVersionBloc>().state;
+    final versionBloc = getIt.get<AppVersionBloc>();
 
-    if (versionBloc.versionStatus == VersionStatus.outdated) {
+    if (versionBloc.state.versionStatus == VersionStatus.outdated) {
       return Container(
         margin: const EdgeInsets.symmetric(vertical: 10),
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
