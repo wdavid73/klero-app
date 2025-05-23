@@ -5,6 +5,6 @@ abstract class TasksDatasource {
   Future<ResponseState> getTasks({String type = '', required String uid});
   Future<ResponseState> deleteTask(String taskId);
   Future<ResponseState> promoteTask(String taskId, String promote);
-  Future<ResponseState> createTask(TaskModel task);
+  Future<ResponseState> createTask(Map<String, dynamic> task);
   Future<ResponseState> updateTask(TaskModel task);
 }

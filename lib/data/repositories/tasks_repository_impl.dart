@@ -14,22 +14,22 @@ class TasksRepositoryImpl extends TasksRepository {
   }
 
   @override
+  Future<ResponseState> createTask(Map<String, dynamic> task) {
+    return datasource.createTask(task);
+  }
+
+  @override
   Future<ResponseState> deleteTask(String taskId) {
-    throw UnimplementedError();
+    return datasource.deleteTask(taskId);
   }
 
   @override
   Future<ResponseState> promoteTask(String taskId, String promote) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<ResponseState> createTask(TaskModel task) {
-    throw UnimplementedError();
+    return datasource.promoteTask(taskId, promote);
   }
 
   @override
   Future<ResponseState> updateTask(TaskModel task) {
-    throw UnimplementedError();
+    return datasource.updateTask(task);
   }
 }

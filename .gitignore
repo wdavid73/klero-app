@@ -1,3 +1,4 @@
+# Environment file
 .env
 
 # Firebase configuration files
@@ -53,3 +54,52 @@ app.*.map.json
 
 # FVM Version Cache
 .fvm/
+
+# Native build artifacts and NDK
+android/.cxx/
+android/app/.cxx/
+**/android/**/.cxx/
+**/android/**/Debug/
+**/android/**/CMakeFiles/
+**/android/**/cmake-build-*/
+**/android/**/intermediates/
+**/android/**/generated/
+
+# CMake and build system files
+*.ninja
+*.cmake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+rules.ninja
+
+# Native build intermediates
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+*.bin
+*.json
+*.txt
+*.lock
+*.d
+*.a
+*.h
+*.c
+*.cpp
+
+# Plugin registrant files (auto-generated)
+
+linux/flutter/generated_plugin_registrant.*
+linux/flutter/generated_plugins.cmake
+
+macos/Flutter/GeneratedPluginRegistrant.swift
+
+windows/flutter/generated_plugin_registrant.*
+windows/flutter/generated_plugins.cmake
+
+**/flutter/generated_plugin_registrant.*
+**/flutter/generated_plugins.cmake
+**/Flutter/GeneratedPluginRegistrant.swift

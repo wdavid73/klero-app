@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:klero_app/app/dependency_injection.dart';
 import 'package:klero_app/config/config.dart';
 import 'package:klero_app/ui/cubits/cubits.dart';
 import 'package:klero_app/ui/widgets/widgets.dart';
@@ -29,6 +31,7 @@ class SettingsScreen extends StatelessWidget {
               _ItemSettings(
                 title: context.translate('account'),
                 icon: Icons.person_rounded,
+                onTap: () => context.pushNamed("account_details"),
               ),
               _ItemSettings(
                 title: context.translate('delete_account'),
@@ -74,14 +77,18 @@ class SettingsScreen extends StatelessWidget {
                 context.translate('theme'),
                 style: context.textTheme.titleSmall,
               ),
-              CustomSwitch(
-                icon: Icon(Icons.dark_mode_outlined),
-                title: context.translate('dark_theme'),
-                switchValue: context.select(
-                  (ThemeModeCubit cubit) => cubit.state.isDarkMode,
-                ),
-                onChanged: (_) {
-                  context.read<ThemeModeCubit>().toggleTheme();
+              BlocSelector<ThemeModeCubit, ThemeModeState, bool>(
+                bloc: getIt.get<ThemeModeCubit>(),
+                selector: (state) => state.isDarkMode,
+                builder: (context, isDarkMode) {
+                  return CustomSwitch(
+                    icon: Icon(Icons.dark_mode_outlined),
+                    title: context.translate('dark_theme'),
+                    switchValue: isDarkMode,
+                    onChanged: (_) {
+                      getIt.get<ThemeModeCubit>().toggleTheme();
+                    },
+                  );
                 },
               ),
             ],
@@ -95,9 +102,11 @@ class SettingsScreen extends StatelessWidget {
 class _ItemSettings extends StatelessWidget {
   final IconData icon;
   final String title;
+  final GestureTapCallback? onTap;
   const _ItemSettings({
     required this.icon,
     required this.title,
+    this.onTap,
   });
 
   @override
@@ -107,6 +116,7 @@ class _ItemSettings extends StatelessWidget {
       children: [
         ListTile(
           leading: Icon(icon),
+          onTap: onTap,
           title: Text(
             title,
             style: context.textTheme.bodyMedium,

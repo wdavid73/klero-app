@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:klero_app/app/dependency_injection.dart';
 import 'package:klero_app/config/config.dart';
 import 'package:klero_app/ui/blocs/blocs.dart';
 import 'package:klero_app/ui/shared/shared.dart';
@@ -9,18 +9,15 @@ class DrawerHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = getIt.get<AuthBloc>();
     return Drawer(
       child: Padding(
         padding: EdgeInsets.zero,
         child: Column(
           children: [
             _DrawerHeader(
-              userName: context.select(
-                (AuthBloc bloc) => bloc.state.user!.fullName,
-              ),
-              userEmail: context.select(
-                (AuthBloc bloc) => bloc.state.user!.email,
-              ),
+              userName: bloc.state.user!.fullName,
+              userEmail: bloc.state.user!.email,
             ),
             Expanded(child: _DrawerBody()),
             AppSpacing.md,
@@ -28,7 +25,7 @@ class DrawerHome extends StatelessWidget {
               icon: Icons.logout,
               text: 'Log out',
               tileColor: ColorTheme.primaryColor,
-              onTap: () => context.read<AuthBloc>().logout(),
+              onTap: () => bloc.logout(),
             ),
           ],
         ),

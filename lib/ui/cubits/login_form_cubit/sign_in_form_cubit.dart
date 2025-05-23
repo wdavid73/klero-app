@@ -95,7 +95,6 @@ class SignInFormCubit extends Cubit<SignInFormState> {
   void _touchEveryField() {
     final email = Email.dirty(value: state.email.value);
     final password = Password.dirty(value: state.password.value);
-
     emit(state.copyWith(
       isFormPosted: true,
       email: email,

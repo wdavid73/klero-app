@@ -24,31 +24,24 @@ Map<AuthStatus, RedirectHandler> redirectHandlers = {
 
 Map<VersionStatus, RedirectHandler> redirectVersionHandlers = {
   VersionStatus.loading: (currentPath) {
-    print("entro aqui - Loading");
     return _handlerVersionCheckingRedirect(currentPath);
   },
   VersionStatus.error: (currentPath) {
-    print("entro aqui - error");
     return _handlerMaintenanceAppRedirect(currentPath);
   },
   VersionStatus.maintenance: (currentPath) {
-    print("entro aqui - maintenance");
     return _handlerMaintenanceAppRedirect(currentPath);
   },
   VersionStatus.unknown: (currentPath) {
-    print("entro aqui - unknown");
     return _handlerMaintenanceAppRedirect(currentPath);
   },
   VersionStatus.forceUpdate: (currentPath) {
-    print("entro aqui - forceUpdate");
     return _handlerReadyAppRedirect(currentPath);
   },
   VersionStatus.outdated: (currentPath) {
-    print("entro aqui - ready");
     return _handlerReadyAppRedirect(currentPath);
   },
   VersionStatus.ready: (currentPath) {
-    print("entro aqui - ready");
     return _handlerReadyAppRedirect(currentPath);
   },
 };
@@ -166,8 +159,11 @@ String? appRedirect({
     final handlerAuth = redirectHandlers[authStatus];
     final handlerChecking = redirectVersionHandlers[versionStatus];
 
-    if (authStatus == AuthStatus.authenticated &&
-        versionStatus != VersionStatus.loading) {
+    bool isAuthenticated = authStatus == AuthStatus.authenticated;
+    bool isNotVersionLoading = versionStatus != VersionStatus.loading;
+    /* bool isNotVersionReady = versionStatus != VersionStatus.ready; */
+
+    if (isAuthenticated && isNotVersionLoading /* && isNotVersionReady */) {
       final handler = handlerChecking;
       return handler?.call(currentPath);
     }

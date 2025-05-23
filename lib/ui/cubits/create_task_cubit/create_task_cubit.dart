@@ -10,23 +10,29 @@ part 'create_task_state.dart';
 
 class CreateTaskCubit extends Cubit<CreateTaskState> {
   final TaskBloc taskBloc;
+
   CreateTaskCubit({required this.taskBloc}) : super(CreateTaskState());
 
-  void onSubmit() async {
+  void onSubmit({required String userId}) async {
     _touchEveryField();
 
     if (!state.isValid) return;
 
     emit(state.copyWith(isPosting: true));
-
     Map<String, dynamic> data = {
       "id": state.id == 'new' ? null : state.id,
       "title": state.title.value,
       "description": state.description.value,
       "date": state.date.value,
+      "type": state.id == 'new' ? 'to_do' : null,
+      "user_id": userId,
     };
 
-    taskBloc.addTask(data);
+    if (state.id != 'new') {
+      taskBloc.updateTask(data);
+    } else {
+      taskBloc.addTask(data);
+    }
 
     await waitForState(
       stream: taskBloc.stream,
