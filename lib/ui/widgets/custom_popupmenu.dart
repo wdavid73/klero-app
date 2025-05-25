@@ -24,6 +24,8 @@ class CustomPopupMenu extends StatelessWidget {
         curve: Easing.standardDecelerate,
         duration: const Duration(milliseconds: 300),
       ),
+      menuPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      position: PopupMenuPosition.under,
       itemBuilder: (context) => <PopupMenuEntry>[
         if (extraOptions != null) ...extraOptions!,
         if (showEdit)

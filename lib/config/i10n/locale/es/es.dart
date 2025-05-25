@@ -27,6 +27,7 @@ Map<String, String> esBase = {
   'update_now': "¡Actualiza ahora!",
   'update_message':
       "¡Actualización disponible! Toca para descargar la última versión y disfrutar de la mejor experiencia.",
+  'account_details': "Detalles de cuenta",
   // AUTH SCREEN
   'sign_in_account': 'Acceda a su cuenta',
   'login': 'Iniciar Sesión',

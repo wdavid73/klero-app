@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:klero_app/config/config.dart';
+import 'package:klero_app/ui/shared/shared.dart';
 import 'package:klero_app/ui/widgets/widgets.dart';
 
 import './widgets/form_sign_in.dart';
@@ -52,18 +53,18 @@ class _LoginBody extends StatelessWidget {
                 child: Column(
                   children: [
                     LogoContainer(),
-                    const SizedBox(height: 10),
+                    AppSpacing.sm,
                     Text(
                       context.translate('sign_in_account'),
                       style: context.textTheme.titleMedium,
                     ),
-                    const SizedBox(height: 10),
+                    AppSpacing.sm,
                     _ButtonsOtherSignIn(),
-                    const SizedBox(height: 10),
+                    AppSpacing.sm,
                     _DividerBody(
                       text: "Or use email",
                     ),
-                    const SizedBox(height: 10),
+                    AppSpacing.sm,
                     WrapperBlocProvidersAuth(child: FormSignIn()),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

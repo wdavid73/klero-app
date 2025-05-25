@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:klero_app/config/theme/utils/responsive.dart';
 
 /// An extension on [BuildContext] that provides easy access to the current
 /// [TextTheme].
@@ -14,4 +15,13 @@ extension FontExtensionTheme on BuildContext {
   /// Returns:
   ///   - The [TextTheme] associated with the current [BuildContext].
   TextTheme get textTheme => Theme.of(this).textTheme;
+}
+
+extension TextScaleFactorExtension on BuildContext {
+  TextScaler get adjustedTextScaleFactor {
+    final textScaler = this.textScaler;
+    return textScaler.clamp(minScaleFactor: 0.8, maxScaleFactor: 1.0);
+  }
+
+  TextScaler get tsf => adjustedTextScaleFactor;
 }

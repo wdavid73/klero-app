@@ -23,7 +23,6 @@ class TaskScreen extends StatelessWidget {
       scaffoldBackgroundColor:
           themeMode.state.isDarkMode ? null : ColorTheme.lightPrimaryColor,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
         title: Text(
           context.translate(
             taskId == 'new' ? "create_task_title" : "edit_task_title",

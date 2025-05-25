@@ -50,7 +50,7 @@ class FilterTag extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: context.textTheme.labelLarge?.copyWith(
+                style: context.textTheme.labelMedium?.copyWith(
                   color: textColor,
                   fontWeight: FontWeight.w600,
                 ),

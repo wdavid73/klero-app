@@ -110,6 +110,7 @@ class _FormTaskState extends State<FormTask> {
               SizedBox(
                 width: context.width,
                 child: CustomButton(
+                  buttonType: CustomButtonType.elevated,
                   label: context.translate(
                     widget.task == null ? "create_task" : "update_task",
                   ),

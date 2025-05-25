@@ -5,12 +5,11 @@ import 'package:klero_app/app/dependency_injection.dart';
 import 'package:klero_app/config/config.dart';
 import 'package:klero_app/domain/entities/task.dart';
 import 'package:klero_app/ui/blocs/blocs.dart';
+import 'package:klero_app/ui/screens/home/widgets/filter_tag.dart';
+import 'package:klero_app/ui/screens/home/widgets/task_item.dart';
 import 'package:klero_app/ui/screens/home/widgets/wrapper_home_bloc_providers.dart';
 import 'package:klero_app/ui/shared/styles/app_spacing.dart';
 import 'package:klero_app/ui/widgets/widgets.dart';
-
-import './widgets/filter_tag.dart';
-import './widgets/task_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -61,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            AppSpacing.sm,
             _FilterCategories(),
             AppSpacing.sm,
             VersionNotification(),
@@ -170,11 +170,10 @@ class _FilterCategories extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: context.width,
+      height: 40,
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        spacing: 10,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
         children: [
           FilterTag(
             count: context.select(
@@ -188,6 +187,7 @@ class _FilterCategories extends StatelessWidget {
             type: "to_do",
             onTap: () => context.read<TaskBloc>().filterTags("to_do"),
           ),
+          AppSpacing.xs,
           FilterTag(
             count: context.select(
               (TaskBloc cubit) =>
@@ -200,6 +200,7 @@ class _FilterCategories extends StatelessWidget {
             type: "in_review",
             onTap: () => context.read<TaskBloc>().filterTags("in_review"),
           ),
+          AppSpacing.xs,
           FilterTag(
             count: context.select(
               (TaskBloc cubit) =>

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:klero_app/config/theme/responsive.dart';
+import 'package:klero_app/config/theme/utils/responsive.dart';
 
 enum DeviceType { phone, tablet, other }
 

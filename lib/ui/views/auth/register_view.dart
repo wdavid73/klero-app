@@ -53,19 +53,22 @@ class _RegisterBody extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      SizedBox(
+                      BackButton(
+                        onPressed: () => context.pop(),
+                      ),
+                      /* SizedBox(
                         width: context.wp(10),
                         child: IconButton(
                           onPressed: () => context.pop(),
                           icon: Icon(
                             Icons.adaptive.arrow_back,
-                            size: context.dp(3),
+                            /* size: context.dp(3), */
                           ),
                         ),
-                      ),
+                      ), */
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.only(right: context.wp(10)),
+                          padding: EdgeInsets.only(right: context.wp(15)),
                           child: LogoContainer(),
                         ),
                       ),

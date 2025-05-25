@@ -80,6 +80,7 @@ Map<String, String> enBase = {
   'update_now': "Update now!",
   'update_message':
       "Update available! Tap to download the latest version and enjoy the best experience.",
+  'account_details': "Account Details",
 };
 
 Map<String, String> enMap = {

@@ -15,7 +15,7 @@ class AccountDetails extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Account details",
+          context.translate("account_details"),
           style: context.textTheme.titleLarge?.copyWith(
             color: Colors.white,
           ),

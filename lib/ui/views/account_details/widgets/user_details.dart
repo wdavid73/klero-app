@@ -20,7 +20,7 @@ class UserDetails extends StatelessWidget {
         children: [
           Text(
             title,
-            style: context.textTheme.titleLarge,
+            style: context.textTheme.titleMedium,
           ),
           ...items,
         ],

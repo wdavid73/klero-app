@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../theme.dart';
 
 /// Base TextTheme. Used as a starting point for customizing the text styles in both light and dark themes.
