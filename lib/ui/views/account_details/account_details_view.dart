@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:klero_app/app/dependency_injection.dart';
 import 'package:klero_app/config/config.dart';
+import 'package:klero_app/ui/blocs/blocs.dart';
+import 'package:klero_app/ui/cubits/cubits.dart';
 import 'package:klero_app/ui/views/account_details/widgets/item_detail.dart';
 import 'package:klero_app/ui/views/account_details/widgets/user_details.dart';
 import 'package:klero_app/ui/views/account_details/widgets/user_profile.dart';
@@ -12,6 +15,8 @@ class AccountDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authBloc = getIt.get<AuthBloc>();
+    final themeMode = getIt.get<ThemeModeCubit>();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -43,8 +48,8 @@ class AccountDetails extends StatelessWidget {
                 bottomRight: Radius.circular(20),
               ),
             ),
-            child: const UserProfile(
-              fullName: "Wilson Padilla",
+            child: UserProfile(
+              fullName: authBloc.state.user!.fullName,
             ),
           ),
           Expanded(
@@ -58,27 +63,28 @@ class AccountDetails extends StatelessWidget {
                       ItemDetail(
                         icon: FontAwesomeIcons.envelope,
                         label: "Principal",
-                        text: "wilson@padilla.com",
+                        text: authBloc.state.user!.email,
                       )
                     ],
                   ),
                   const Divider(),
-                  UserDetails(
-                    title: "Mobile number",
-                    items: [
-                      ItemDetail(
-                        icon: FontAwesomeIcons.phone,
-                        text: "+57 3005481972",
-                      )
-                    ],
+                  Opacity(
+                    opacity: 0.2,
+                    child: SvgPictureCustom(
+                      iconPath: 'assets/icon/logo_app.svg',
+                      iconSize: context.dp(20),
+                      colorFilter: themeMode.state.isDarkMode
+                          ? ColorFilter.mode(Colors.white, BlendMode.srcIn)
+                          : ColorFilter.mode(
+                              ColorTheme.primaryColor, BlendMode.srcIn),
+                    ),
                   ),
-                  const Divider(),
                   const Spacer(),
                   SizedBox(
                     width: context.width,
                     child: CustomButton(
                       buttonType: CustomButtonType.elevated,
-                      onPressed: () {},
+                      onPressed: () => authBloc.logout(),
                       label: context.translate('logout'),
                       icon: FaIcon(FontAwesomeIcons.arrowRightFromBracket),
                     ),

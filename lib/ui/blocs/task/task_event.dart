@@ -35,8 +35,3 @@ class PromoteTaskEvent extends TaskEvent {
 }
 
 class CreateMultipleTask extends TaskEvent {}
-
-class FilterTasksEvent extends TaskEvent {
-  String filter;
-  FilterTasksEvent({required this.filter});
-}

@@ -1,5 +1,6 @@
 import 'en_form_texts.dart';
 import 'en_form_validation.dart';
+import 'features/en_auth_error.dart';
 import 'features/en_introduction.dart';
 import 'features/en_task.dart';
 
@@ -81,10 +82,12 @@ Map<String, String> enBase = {
   'update_message':
       "Update available! Tap to download the latest version and enjoy the best experience.",
   'account_details': "Account Details",
+  'coming_soon': "Coming soon..."
 };
 
 Map<String, String> enMap = {
   ...enBase,
+  ...authError,
   ...formValidations,
   ...formTexts,
   ...introduction,

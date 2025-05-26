@@ -89,6 +89,7 @@ class FirebaseAuthDataSource extends AuthDataSource {
         return ResponseFailed(
           DioException(
             message: 'User data not found in Firestore after login.',
+            error: 'User data not found in Firestore after login.',
             requestOptions: RequestOptions(path: 'Firestore'),
           ),
         );
@@ -103,6 +104,7 @@ class FirebaseAuthDataSource extends AuthDataSource {
       return ResponseFailed(
         DioException(
           error: e.code,
+          message: e.code,
           requestOptions: RequestOptions(path: 'firebaseAuth'),
         ),
       );

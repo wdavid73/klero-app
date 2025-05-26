@@ -40,26 +40,28 @@ class _FormTaskState extends State<FormTask> {
         icon: Icons.warning_rounded,
         colorIcon: ColorTheme.error,
       );
-    }
-
-    if (state.status == TaskStatus.created) {
+    } else if (state.status == TaskStatus.created) {
       CustomSnackBar.showSnackBar(
         context,
         message: "Task created!",
         icon: Icons.task_alt_rounded,
       );
-      Future.delayed((const Duration(milliseconds: 100)))
-          .then((_) => context.pop());
-    }
-
-    if (state.status == TaskStatus.updated) {
+      Future.delayed((const Duration(milliseconds: 100))).then((_) {
+        if (context.mounted) {
+          context.pop();
+        }
+      });
+    } else if (state.status == TaskStatus.updated) {
       CustomSnackBar.showSnackBar(
         context,
         message: "Task updated!",
         icon: Icons.task_alt_rounded,
       );
-      Future.delayed((const Duration(milliseconds: 100)))
-          .then((_) => context.pop());
+      Future.delayed((const Duration(milliseconds: 100))).then((_) {
+        if (context.mounted) {
+          context.pop();
+        }
+      });
     }
   }
 
