@@ -121,7 +121,8 @@ class _ButtonsOtherSignIn extends StatelessWidget {
     return Wrap(
       children: [
         FilledButton(
-          onPressed: () {},
+          onPressed: () => CustomSnackBar.showSnackBar(context,
+              message: context.translate("coming_soon")),
           style: buttonStyle,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,

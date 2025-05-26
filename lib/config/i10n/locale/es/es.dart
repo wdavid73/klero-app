@@ -1,5 +1,6 @@
 import 'es_form_texts.dart';
 import 'es_form_validation.dart';
+import 'features/es_auth_error.dart';
 import 'features/es_introduction.dart';
 import 'features/es_task.dart';
 
@@ -28,6 +29,7 @@ Map<String, String> esBase = {
   'update_message':
       "¡Actualización disponible! Toca para descargar la última versión y disfrutar de la mejor experiencia.",
   'account_details': "Detalles de cuenta",
+  'coming_soon': "Próximamente...",
   // AUTH SCREEN
   'sign_in_account': 'Acceda a su cuenta',
   'login': 'Iniciar Sesión',
@@ -92,6 +94,7 @@ Map<String, String> esBase = {
 
 Map<String, String> esMap = {
   ...esBase,
+  ...authError,
   ...formValidations,
   ...formTexts,
   ...introduction,
