@@ -156,7 +156,7 @@ class ThemeConstants {
       color: ColorTheme.textPrimary,
     ),
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadiusGeometry.circular(16),
+      borderRadius: BorderRadius.circular(16),
     ),
   );
 
@@ -171,7 +171,7 @@ class ThemeConstants {
     centerTitle: false,
     elevation: 0,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadiusGeometry.circular(16),
+      borderRadius: BorderRadius.circular(16),
     ),
   );
 
