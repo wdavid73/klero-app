@@ -168,6 +168,7 @@ class _FilterCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String uid = context.read<AuthBloc>().state.user!.id;
     return Container(
       width: context.width,
       height: 40,
@@ -177,41 +178,43 @@ class _FilterCategories extends StatelessWidget {
         children: [
           FilterTag(
             count: context.select(
-              (TaskBloc cubit) =>
-                  cubit.state.tasks.where((e) => e.type == 'to_do').length,
+              (TaskBloc bloc) => bloc.state.counts["to_do"] ?? 0,
             ),
             isSelected: context.select(
               (TaskBloc bloc) => bloc.state.filter == 'to_do',
             ),
             label: context.translate("to_do"),
             type: "to_do",
-            onTap: () => context.read<TaskBloc>().filterTags("to_do"),
+            onTap: () =>
+                context.read<TaskBloc>().filterTags(filter: "to_do", uid: uid),
           ),
           AppSpacing.xs,
           FilterTag(
             count: context.select(
-              (TaskBloc cubit) =>
-                  cubit.state.tasks.where((e) => e.type == 'in_review').length,
+              (TaskBloc bloc) => bloc.state.counts["in_review"] ?? 0,
             ),
             isSelected: context.select(
               (TaskBloc bloc) => bloc.state.filter == 'in_review',
             ),
             label: context.translate("in_review"),
             type: "in_review",
-            onTap: () => context.read<TaskBloc>().filterTags("in_review"),
+            onTap: () => context
+                .read<TaskBloc>()
+                .filterTags(filter: "in_review", uid: uid),
           ),
           AppSpacing.xs,
           FilterTag(
             count: context.select(
-              (TaskBloc cubit) =>
-                  cubit.state.tasks.where((e) => e.type == 'complete').length,
+              (TaskBloc bloc) => bloc.state.counts["complete"] ?? 0,
             ),
             isSelected: context.select(
               (TaskBloc bloc) => bloc.state.filter == 'complete',
             ),
             label: context.translate("complete"),
             type: "complete",
-            onTap: () => context.read<TaskBloc>().filterTags("complete"),
+            onTap: () => context
+                .read<TaskBloc>()
+                .filterTags(filter: "complete", uid: uid),
           ),
         ],
       ),

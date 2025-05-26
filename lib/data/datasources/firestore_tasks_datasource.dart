@@ -18,10 +18,17 @@ class FirestoreTasksDatasource implements TasksDatasource {
     required String uid,
   }) async {
     try {
-      QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
-          .collection(collection)
-          .where("user_id", isEqualTo: uid)
-          .get();
+      List<String> types = ["to_do", 'in_review', 'complete'];
+      Map<String, dynamic> counts = await countTypes(types, uid);
+
+      Query<Map<String, dynamic>> query =
+          _firestore.collection(collection).where('user_id', isEqualTo: uid);
+
+      if (type.isNotEmpty) {
+        query = query.where('type', isEqualTo: type);
+      }
+
+      QuerySnapshot<Map<String, dynamic>> querySnapshot = await query.get();
 
       List<Task> tasks = [];
 
@@ -31,7 +38,13 @@ class FirestoreTasksDatasource implements TasksDatasource {
         json["id"] = doc.id;
         tasks.add(TaskModel.fromJson(json));
       }
-      return ResponseSuccess(tasks, 200);
+      return ResponseSuccess(
+        {
+          "tasks": tasks,
+          "counts": counts,
+        },
+        200,
+      );
     } catch (e) {
       return ResponseFailed(DioException(
         requestOptions: RequestOptions(path: "firestore"),
@@ -141,5 +154,23 @@ class FirestoreTasksDatasource implements TasksDatasource {
         ),
       );
     }
+  }
+
+  Future<Map<String, dynamic>> countTypes(
+      List<String> types, String uid) async {
+    Map<String, int> counts = {};
+    for (String type in types) {
+      try {
+        final query = _firestore
+            .collection(collection)
+            .where('type', isEqualTo: type)
+            .where('user_id', isEqualTo: uid);
+        final AggregateQuerySnapshot snapshot = await query.count().get();
+        counts[type] = snapshot.count ?? 0;
+      } catch (e) {
+        counts[type] = 0;
+      }
+    }
+    return counts;
   }
 }

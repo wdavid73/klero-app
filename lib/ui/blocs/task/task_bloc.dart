@@ -17,16 +17,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> with TaskBlocHandler {
     on<EditTaskEvent>(handlerUpdateTask);
     on<DeleteTaskEvent>(handlerDeleteTask);
     on<PromoteTaskEvent>(handlerPromoteTask);
-
-    on<FilterTasksEvent>((event, emit) async {
-      String filter = event.filter;
-      emit(state.copyWith(isLoading: true));
-      await Future.delayed(const Duration(seconds: 1));
-      emit(state.copyWith(
-        isLoading: false,
-        filter: state.filter == filter ? '' : filter,
-      ));
-    });
   }
 
   void getTasks({String type = '', required String uid}) {
@@ -49,8 +39,8 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> with TaskBlocHandler {
     add(EditTaskEvent(task: task));
   }
 
-  void filterTags(String filter) {
-    add(FilterTasksEvent(filter: filter));
+  void filterTags({String filter = '', required String uid}) {
+    add(GetTaskEvent(type: filter, uid: uid));
   }
 
   Task? getTaskById(String taskId) {

@@ -10,6 +10,7 @@ enum TaskStatus {
 
 class TaskState extends Equatable {
   final List<Task> tasks;
+  final Map<String, dynamic> counts;
   final TaskStatus status;
   final String? error;
   final bool creatingTask;
@@ -18,6 +19,7 @@ class TaskState extends Equatable {
 
   const TaskState({
     this.tasks = const <Task>[],
+    this.counts = const {},
     this.status = TaskStatus.none,
     this.error,
     this.creatingTask = false,
@@ -32,6 +34,7 @@ class TaskState extends Equatable {
         creatingTask,
         isLoading,
         filter,
+        counts,
       ];
 
   TaskState copyWith({
@@ -41,6 +44,7 @@ class TaskState extends Equatable {
     bool? creatingTask,
     bool? isLoading,
     String? filter,
+    Map<String, dynamic>? counts,
   }) =>
       TaskState(
         tasks: tasks ?? this.tasks,
@@ -49,5 +53,6 @@ class TaskState extends Equatable {
         creatingTask: creatingTask ?? this.creatingTask,
         isLoading: isLoading ?? this.isLoading,
         filter: filter ?? this.filter,
+        counts: counts ?? this.counts,
       );
 }

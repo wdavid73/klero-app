@@ -5,13 +5,14 @@ mixin TaskBlocHandler on Bloc<TaskEvent, TaskState> {
     GetTaskEvent event,
     Emitter<TaskState> emit,
   ) async {
+    String type = event.type == state.filter ? '' : event.type;
     emit(state.copyWith(
       isLoading: true,
       status: TaskStatus.none,
+      filter: type,
     ));
-    final response = await (this as TaskBloc)
-        .useCase
-        .getTasks(type: event.type, uid: event.uid);
+    final response =
+        await (this as TaskBloc).useCase.getTasks(type: type, uid: event.uid);
 
     if (response is ResponseFailed) {
       emit(state.copyWith(
@@ -19,14 +20,18 @@ mixin TaskBlocHandler on Bloc<TaskEvent, TaskState> {
         tasks: [],
         error: response.error!.message.toString(),
         status: TaskStatus.error,
+        counts: {},
       ));
     }
 
-    List<Task> tasks = response.data as List<Task>;
+    Map<String, dynamic> data = response.data as Map<String, dynamic>;
+    List<Task> tasks = data["tasks"];
+    Map<String, int> counts = data["counts"];
 
     emit(state.copyWith(
       isLoading: false,
       tasks: tasks,
+      counts: counts,
       error: '',
     ));
   }
