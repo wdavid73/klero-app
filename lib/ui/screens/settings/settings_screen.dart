@@ -38,10 +38,10 @@ class SettingsScreen extends StatelessWidget {
                 icon: Icons.person_rounded,
                 onTap: () => context.pushNamed("account_details"),
               ),
-              _ItemSettings(
+              /* _ItemSettings(
                 title: context.translate('delete_account'),
                 icon: Icons.delete_forever_rounded,
-              ),
+              ), */
               /* const SizedBox(height: 20),
                 Text(
                   context.translate('feedback'),

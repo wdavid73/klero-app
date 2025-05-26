@@ -6,6 +6,7 @@ class SvgPictureCustom extends StatelessWidget {
   final double iconSize;
   final Alignment alignment;
   final BoxFit fit;
+  final ColorFilter? colorFilter;
 
   const SvgPictureCustom({
     super.key,
@@ -13,6 +14,7 @@ class SvgPictureCustom extends StatelessWidget {
     this.iconSize = 30,
     this.alignment = Alignment.center,
     this.fit = BoxFit.contain,
+    this.colorFilter,
   });
 
   @override
@@ -23,6 +25,7 @@ class SvgPictureCustom extends StatelessWidget {
       height: iconSize,
       alignment: alignment,
       fit: fit,
+      colorFilter: colorFilter,
     );
   }
 }
