@@ -2,12 +2,21 @@ workflows:
   ios-build:
     name: iOS Build
     environment:
-      flutter: stable
+      flutter: 3.32.0
       xcode: latest
       cocoapods: default
     scripts:
+      - name: Clean Flutter build
+        script: flutter clean
+
       - name: Get Flutter packages
         script: flutter pub get
+
+      - name: Run pod install
+        script: |
+          cd ios
+          pod install
+          cd ..
 
       - name: Build iOS app
         script: flutter build ios --release --no-codesign
